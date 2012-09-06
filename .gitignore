@@ -3,4 +3,5 @@ log/*
 trash/*
 TODO
 .DS_Store
-
+composer.lock
+vendor
