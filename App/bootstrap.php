@@ -2,7 +2,7 @@
 #error_reporting(E_ALL);
 const ROOT = __DIR__;
 
-$loader = require __DIR__."/../vendor/autoload.php";
+$loader = require dirname(ROOT)."/../vendor/autoload.php";
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,8 +61,8 @@ $app['http_cache.cache_dir'] = $app['cache.path'];
 $app['root']="";
 $app['configuration_script_path'] = ROOT . '/config/configuration.php';
 $app['configuration_file'] = ROOT . "/config/configuration.yaml";
-$app['config.server'] = getenv('MONGOBLOG_SERVER')?getenv('MONGODB_SERVER'):"localhost";
-$app['config.database'] = getenv("MONGOBLOG_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
+$app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"localhost";
+$app['config.database'] = getenv("MONGODB_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
 $app['config.site_title'] = "Mongo Blog";
 $app['config.default_user_role'] = "ROLE_WRITER";
 $app["mongo"] = $app->share(function($app) {
