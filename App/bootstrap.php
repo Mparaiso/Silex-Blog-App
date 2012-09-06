@@ -2,7 +2,7 @@
 #error_reporting(E_ALL);
 const ROOT = __DIR__;
 
-$loader = require dirname(ROOT)."/../vendor/autoload.php";
+$loader = require dirname(ROOT)."/vendor/autoload.php";
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -152,9 +152,9 @@ $app['security.firewalls'] = function(Application $app) {
                       'username_parameter' => 'login[username]',
                       'password_parameter' => 'login[password]',
                       "csrf_parameter" => "login[_token]",
-                      "failure_forward" => true,
+                      #"failure_forward" => false,
                       "failure_path" => "/user/login",
-                      "use_forward" => true,
+                      #"use_forward" => true,
                   ),
                   'logout' => array(
                       'logout_path' => "/admin/user/logout",

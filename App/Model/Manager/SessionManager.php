@@ -64,14 +64,14 @@ class SessionManager extends BaseManager implements \SessionHandlerInterface{
   }
 
   public function write($sessionId, $data) {
-    $expired_at = time() + self::SESSION_TIMEOUT;
+    $expired_at = time() + 1800 ; #self::SESSION_TIMEOUT bug around that @TODO fix it
     $new_obj = array(
         'data' => $data,
         'timedout_at' =>
         time() + self::SESSION_TIMEOUT,
         'expired_at' =>
         (empty($this->_currentSession)) ?
-                time() + SessionManager::SESSION_LIFESPAN : $this->_currentSession['expired_at']
+                time() + self::SESSION_LIFESPAN : $this->_currentSession['expired_at']
     );
     $query = array('session_id' => $sessionId);
     $this->_collection->update(

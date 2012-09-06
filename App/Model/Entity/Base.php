@@ -2,7 +2,7 @@
 
 namespace App\Model\Entity;
 
-class Base implements \ArrayAccess {
+abstract class Base implements \ArrayAccess {
 
   protected $created_at;
   protected $updated_at;
@@ -18,7 +18,7 @@ class Base implements \ArrayAccess {
     if(method_exists($this,$method)):
       return $this->$method();
     elseif (property_exists($this, $name)):
-      return $this->$name;
+        return $this->$name;
     endif;
   }
 
@@ -58,7 +58,10 @@ class Base implements \ArrayAccess {
   }
 
   function toArray(){
-    return (array)$this;
+    $array=array();
+    $array['created_at']=$this->created_at;
+    $array['updated_at']=$this->updated_at;
+    return $array;
   }
 
   function serialize(){

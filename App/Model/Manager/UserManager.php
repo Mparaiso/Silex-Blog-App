@@ -71,15 +71,25 @@ class UserManager extends BaseManager implements UserProviderInterface {
   }
 
   function registerUser($datas) {
+    if($this->usernameExists($datas['username'])):
+      throw new Exception("The username is already taken");
+    elseif($this->emailExists($datas['email'])):
+      throw new Exception("The email is already taken");
+    endif;
     $user = new User($datas['username'], $datas['password'], array($this->_app['config.default_user_role']), true, true, true, true);
     $encoder = $this->_app['security.encoder_factory']->getEncoder($user);
     $datas['password'] = $encoder->encodePassword($datas['password'], $user->getSalt());
     $datas['confirmed'] = true;
     $datas['active'] = true;
     $datas['type'] = 'user';
-    $datas['roles'] = $this->_app['config.default_user_role'];
-    $status = $this->_collection->insert($datas, array('safe' => true));
-    return $datas;
+    $datas['roles'] = array($this->_app['config.default_user_role']); # must be an array
+    $user = new EntityUser($datas);
+    $user['created_at']=new \MongoDate();
+    $user['updated_at']=new \MongoDate();
+    $userToCommit = $user->toArray();
+    unset($userToCommit['_id']);
+    $status = $this->_collection->insert($userToCommit, array('safe' => true));
+    return $user;
   }
 
   function getUser() {
@@ -96,6 +106,7 @@ class UserManager extends BaseManager implements UserProviderInterface {
   }
 
   /** UserProviderInterface * */
+
   function loadUserByUsername($username) {
     $_user = $this->_collection->findone(array("username" => $username));
     if (empty($_user)):
