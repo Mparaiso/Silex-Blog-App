@@ -1,0 +1,8 @@
+<h3>Features</h3>
+{% for article in articles %}
+<div class="span4">
+	<h3>{{article.title}}</h3>
+	<p>{{article.content|slice(0,200)}}(...)</p>
+	<div><a class='btn btn-info' href="{{path('article.get',{'slug': article.slug})}}">Read more</a> </div>
+</div>
+{% endfor %}

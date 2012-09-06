@@ -1,0 +1,9 @@
+{# @note @twig EN :create a form #}
+{# @note @twig FR :creer un formulaire #}
+<form  action="{{ action }}"  method="post">
+  <legend>Login</legend>
+  	{{ form_error }}
+    {{ form_errors(form) }}
+    {{form_widget(form)}}
+  <input class="btn" type="submit" name="submit">
+</form>

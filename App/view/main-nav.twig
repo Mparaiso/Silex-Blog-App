@@ -1,0 +1,51 @@
+<div class="navbar navbar-inverse"> {#navbar-fixed-top">#}
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="{{path('index.index')}}">Mongo blog </a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li {#class="active"#}><a href="{{path("index.index")}}">Home</a></li>
+          <li><a href="{{path("article.index")}}">Articles</a></li>
+          <li><a href="{{path('index.about')}}">About</a></li>
+          <li><a href="{{path('index.contact')}}">Contact</a></li>
+        </ul>
+        <ul class="nav pull-right">
+             {% if app.user_manager.isLoggedIn() %} 
+              {% set local_user = app.user_manager.getUser() %}
+            <li>
+              <a href="#">
+                <small>Welcome back {{local_user.username|capitalize}}.</small>
+              </a>
+            </li>
+            <li>
+              <div class="btn-group">
+                <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                  User menu&nbsp;
+                  <span class="caret"></span>
+                </a>
+                <!-- dropdown menu links -->
+                  {% include 'user/user-menu.twig' %}
+              </div>
+            </li>
+
+            <li>
+              <a  href="{{path('admin_user_logout')}}">Logout</a>
+            </li>
+              {% else %}
+            <li>
+              <a  href="{{path('user.login')}}">Login</a>
+            </li>
+            <li>
+              <a  href="{{path('user.signup')}}">SignUp</a>
+            </li>
+              {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>

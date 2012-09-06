@@ -1,0 +1,7 @@
+<div>
+{% for comment in comments %}
+<div><strong>{{comment.name}}</strong></div>
+<div><small>{{comment.created_at.sec|date("r")}}</small></div>
+<p>{{comment.content}}</p>
+{% endfor %}
+</div>

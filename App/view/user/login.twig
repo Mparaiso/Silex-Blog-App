@@ -1,0 +1,4 @@
+{% extends 'layout.twig' %}
+{% block content %}
+	{% include 'form/login.twig' with {'last_username': last_username,'form': loginForm,'action': path('admin_user_dologin'),"form_error": form_error} only %}
+{% endblock %}

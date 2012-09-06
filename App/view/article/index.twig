@@ -1,0 +1,14 @@
+{% extends "layout.twig"%}
+
+{% block content %}
+<div class="page-header">
+  <h1>Articles</h1>
+</div>
+
+  {% for article in articles %}
+<h2>{{article.title}} <small>{{article.created_at.sec|date('m/d/Y')}}</small></h2>
+<p class="author"><small>{{article.author}}</small></p>
+<p>{{article.content|slice(1,300)}}...</p>
+<p><a href='{{ path('article.get',{'slug':article.slug})}}' class="btn btn-info">Read more</a></p>
+ {% endfor %}
+{% endblock %}

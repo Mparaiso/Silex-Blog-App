@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project  default="deploy" name="upload website">
+<tstamp>
+    <format property="TODAY_FR" pattern="d-MMMM-yyyy:hh-mm" locale="fr,FR"/>
+  </tstamp>
+  <target name="deploy">
+  	<property file="build.properties"/>
+	<exec executable="git">
+	    <arg line="add ."/>
+	</exec>
+	<exec executable="git">
+	    <arg line='commit -am"${message} ${TODAY_FR}"'/>
+	</exec>
+	<exec executable="git">
+	    <arg line="push ${branch} master"/>
+	</exec>
+  </target>
+</project>

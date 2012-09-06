@@ -1,0 +1,22 @@
+#configuration file
+database: 
+  # database
+  database: mongoblog
+  driver: mongodb
+  password: ~
+  server: localhost
+  user: ~
+site:
+  # site configuration
+  title: 'Mongo Blog'
+  homepage:
+    articles: 10
+    #how many featured articles to display
+    featured: 3 
+  bootstrap: ~
+# default user configuration
+user:
+  role:
+    default: ROLE_USER
+security:
+  params: ~
