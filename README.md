@@ -14,6 +14,15 @@
   + create , update , delete articles
   + comments
 
++ Symfony modules :
+	+ security
+	+ session
+	+ monolog
+	+ form
+	+ config
+	+ translation
+	+ ...
+
 ## requires :
 
 + PHP 5.3.*
@@ -28,7 +37,9 @@ install with composer :
 
 + php /path/to/composer/composer.phar install
 
-+ change the path of the autoloader.php in app/bootstrap.php to "../vendor/autoload.php"
++ change the path of the autoloader.php in app/bootstrap.php to "../vendor/autoload.php" or wherever the vendor/autoload.php file is.
+
++ use a local MongoDB server (localhost) , the name of the database is by default mongoblog OR set the envirronment variables on your server MONGODB_SERVER and MONGODB_DATABASE ( in a .htaccess file with SetEnv for instance ).
 
 
 
