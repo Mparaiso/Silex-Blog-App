@@ -12,7 +12,7 @@
 	    <arg line='commit -am"${message} ${TODAY_FR}"'/>
 	</exec>
 	<exec executable="git">
-	    <arg line="push ${branch} master"/>
+	    <arg line="push -f ${branch} master"/>
 	</exec>
   </target>
 </project>
