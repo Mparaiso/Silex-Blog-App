@@ -22,7 +22,7 @@ class CommentController implements ControllerProviderInterface {
   public function index(Application $app,$article_id){
     $commentManager = $app['comment_manager'];
     $comments = $commentManager->getCommentsByArticleId($article_id);
-    return $app["twig"]->render("comment/indeX.twig",array("comments"=>$comments));
+    return $app["twig"]->render("comment/index.twig",array("comments"=>$comments));
   }
 
   public function create(Application $app, $article_id) {

@@ -81,12 +81,12 @@ class ArticleAdminController implements ControllerProviderInterface {
       $user = $app['user_manager']->getUser();
       $article_ = $app['article_manager']->insert($article, $user['_id']);
       $app["session"]->setFlash("success", "Article \"$article_[title]\" , $article_[_id] , saved !");
+      return $app->redirect($app['url_generator']->generate("admin.article.dashboard"));
     else:
       $app["session"]->setFlash("error", "The form contains errors !");
     endif;
     $request = $app["request"];
-    $subrequest = $request::create($app["url_generator"]->generate("admin.article.dashboard"), "GET");
-    return $app->handle($subrequest, HttpKernelInterface::SUB_REQUEST);
+    return $app['twig']->render("article/create.twig", array("form" => $this->form->createView()));
   }
 
   function edit(Application $app, $id) {
