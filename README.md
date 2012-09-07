@@ -2,6 +2,8 @@
 ## A blog engine powered with Silex and MongoDB in php
 ### this is a Silex showcase app written with php and Silex
 
+### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
+
 
 ## features
 
@@ -44,5 +46,5 @@ install with composer :
 
 
 ### get some help : mparaiso@online.fr
-#### please contribute , fork , refactor and push some code ;)
+#### please contribute , fork , refactor and make pull request ;)
 
