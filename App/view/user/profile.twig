@@ -1,8 +1,10 @@
 {% extends 'layout.twig' %}
 {% block content %}
 <div class="page-header"><h1>User profile</h1></div>
-<div class="well">x
-<div><img src="{{app.gravatar.getGravatar(user.email,100)|default(url('index.index')~'/img/default.gif')}}" alt="avatar" title='{{user.username}}'></div>
+<div class="well">
+<div>
+	<img src="{{app.gravatar.getGravatar(user.email,100)|default(url('index.index')~'/img/default.gif')}}" alt="avatar" title='{{user.username}}'>
+</div>
 <adress>
 <strong>{{user.username|capitalize}}</strong><br/>
 {{user.firstname ~" "~user.lastname|capitalize}}<br/>
@@ -10,5 +12,4 @@
 {{user.adress.country|default('')}}<br/>
 </adress>
 </div>
-blop
 {% endblock %}
