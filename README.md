@@ -44,5 +44,5 @@ install with composer :
 
 
 ### get some help : mparaiso@online.fr
-### pushes welcomed !
+#### please contribute , fork , refactor and push some code ;)
 

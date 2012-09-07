@@ -1,5 +1,5 @@
 <?php
-namespace Lib{
+namespace App\Helper{
 
   class Gravatar{
     /**

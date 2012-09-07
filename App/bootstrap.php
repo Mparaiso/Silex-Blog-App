@@ -82,7 +82,7 @@ $app['session.storage.handler'] = $app->share(function ($app) {
         }
 );
 $app["gravatar"] = $app->share(function($app) {
-          return new \Lib\Gravatar();
+          return new App\Helper\Gravatar();
         });
 # user manager
 $app['user_manager'] = $app->share(function($app) {
