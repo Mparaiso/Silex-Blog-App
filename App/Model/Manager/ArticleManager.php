@@ -88,4 +88,13 @@ class ArticleManager extends BaseManager {
     return $articles;
   }
 
+  /**
+  *@return array
+  */
+  function getFirstThreeArticles(){
+    $cursor = $this->getArticles(array("created_at"=>-1),array(),false);
+    $articles = $cursor->limit(3);
+    return iterator_to_array($cursor->limit(3));
+  }
+
 }

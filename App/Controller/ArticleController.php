@@ -51,7 +51,7 @@ class ArticleController implements ControllerProviderInterface {
 
   function getFeaturedArticles(Application $app, $ids) {
     $ids = json_decode($ids);
-    $articles = $app['article_manager']->getArticlesFromIds($ids);
+    $articles = $app['article_manager']->getFirstThreeArticles();
     return $app['twig']->render('article/featured.twig', array('articles' => $articles));
   }
 
