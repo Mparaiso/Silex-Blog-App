@@ -13,15 +13,15 @@ namespace App\Controller{
         public $form = "this is a form";
 
         public function index(Application $app){
-            return $app["twig"]->render("home/index.twig",array("message"=>"homepage"));
+            return $app["twig"]->render("index/index.twig",array("message"=>"homepage"));
         }
 
         public function about(Application $app){
-            return $app["twig"]->render("home/about.twig");
+            return $app["twig"]->render("index/about.twig");
         }
 
         public function contact(Application $app){
-            return $app["twig"]->render("home/contact.twig");
+            return $app["twig"]->render("index/contact.twig");
         }
         public function info(Application $app){
             return phpinfo();

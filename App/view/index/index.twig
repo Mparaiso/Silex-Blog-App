@@ -1,6 +1,10 @@
 {% extends "layout.twig" %}
 {% block content %}
-<div class='hero-unit'><div class="page-header"><h1>Welcome to mongo blog</h1></div></div>
+<div class='hero-unit'><div class="page-header"><h1>Welcome to Silex blog</h1>
+<div>A show case app powered by PHP , Silex , Symfony , MongoDB and Twitter Bootstrap</div>
+<div>Please register and write articles about anything you like</div>
+<div><small>Design : M.Paraiso</small> </div>
+</div></div>
 <div class='row'>
 {# display the first 3 of the latest articles #}
 {{ render(path('article.featured',{'ids': ['503cb6490f44c43811000000','503a81ff0f44c4ac07000001','503a801c0f44c4ac07000000']|json_encode()} )) }}
