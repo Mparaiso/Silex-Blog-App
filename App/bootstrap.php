@@ -200,8 +200,8 @@ $app['security.access_rules'] = $app->share(function() {
 );
 $app->before(
   function(Request $request)use($app){
-    $app['monolog']->addInfo(json_encode(array("ip"=>$request->getClientIp())));
+    $app['monolog']->addInfo(json_encode(array("ip"=>$app['request']->getClientIp())));
   }
 );
-$app->get('/mu-1234-cafe-5678-babe',function(){return 42;});
+
 return $app;

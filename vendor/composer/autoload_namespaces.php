@@ -11,6 +11,7 @@ return array(
     'Symfony\\Component\\Translation' => $vendorDir . '/symfony/translation/',
     'Symfony\\Component\\Security' => $vendorDir . '/symfony/security/',
     'Symfony\\Component\\Routing' => $vendorDir . '/symfony/routing/',
+    'Symfony\\Component\\Process' => $vendorDir . '/symfony/process/',
     'Symfony\\Component\\OptionsResolver' => $vendorDir . '/symfony/options-resolver/',
     'Symfony\\Component\\Locale' => $vendorDir . '/symfony/locale/',
     'Symfony\\Component\\HttpKernel' => $vendorDir . '/symfony/http-kernel/',
@@ -20,8 +21,10 @@ return array(
     'Symfony\\Component\\Config' => $vendorDir . '/symfony/config/',
     'Symfony\\Component\\ClassLoader' => $vendorDir . '/symfony/class-loader/',
     'Symfony\\Bridge\\Twig' => $vendorDir . '/symfony/twig-bridge/',
+    'SilexExtension' => $vendorDir . '/fate/silex-extensions/src',
     'Silex' => $vendorDir . '/silex/silex/src/',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
+    'Assetic' => $vendorDir . '/kriswallsmith/assetic/src/',
 );

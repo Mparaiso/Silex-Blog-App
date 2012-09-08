@@ -1,0 +1,9 @@
+/**
+* main style sheet for the app
+*/
+@import url(Hermes-Regular/fonts.css);
+@import url(Hermes-Bold/fonts.css);
+@import url(Hermes-Thin/fonts.css);
+body{
+	font-family: 'Hermes',Helvetica, Arial ,sans-serif;
+}

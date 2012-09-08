@@ -11,6 +11,8 @@
     "symfony/security":"*",
     "monolog/monolog":"*",
     "symfony/config":"*",
-    "symfony/class-loader":"*"
+    "symfony/class-loader":"*",
+    "kriswallsmith/assetic":"1.*",
+    "fate/silex-extensions":"*"
   }
 }
