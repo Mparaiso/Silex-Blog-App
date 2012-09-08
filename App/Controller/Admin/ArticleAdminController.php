@@ -8,6 +8,8 @@ use Silex\ControllerCollection;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Form\Form;
 
+use App\Model\Entity\Article;
+
 class ArticleAdminController implements ControllerProviderInterface {
 
   /**
@@ -101,13 +103,14 @@ class ArticleAdminController implements ControllerProviderInterface {
     if ($form->isValid()):
       $article = $app['article_manager']->getById($id);
       $datas = $form->getData();
-      $article["title"] = $datas["title"];
-      $article["content"] = $datas["content"];
-      $article["updated_at"] = new \MongoDate();
-      $article["update_count"]++;
-      $article = $app['article_manager']->update($id);
+      $articleEntity = new Article($article);
+      $articleEntity->title = $datas["title"];
+      $articleEntity->content = $datas["content"];
+      $articleEntity->updated_at = new \MongoDate();
+      $articleEntity->update_count++;
+      $article = $app['article_manager']->update($id,$articleEntity);
       $app["session"]->setFlash("success", "the article was updated");
-      return $app->redirect($app["url_generator"]->generate('article.dashboard'));
+      return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
     else:
       $app["session"]->setFlash("error", "the form contains errors");
       $request = $app["request"];

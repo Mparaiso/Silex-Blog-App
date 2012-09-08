@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 {% block content %}
-<form  action="{{ path("article.put",{'id':article_id})}} " method="post">
+<form  action="{{ path("admin.article.put",{'id':article_id})}} " method="post">
   <legend>Update an article.</legend>
 	{{form_widget(form)}}
   <input class="btn" type="submit" name="submit">

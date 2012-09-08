@@ -3,6 +3,7 @@
 namespace App\Model\Manager;
 
 use MongoId;
+use App\Model\Entity\Article;
 
 class ArticleManager extends BaseManager {
 
@@ -31,18 +32,19 @@ class ArticleManager extends BaseManager {
    * @param array $datas
    * @return array
    */
-  function update($article_id, array $datas) {
+  function update($article_id,Article $articleToUpdate) {
     $article = $this->getById($article_id);
     $article['type'] = 'article';
-    $article['content'] = $datas['content'];
-    $article['title'] = $datas['title'];
-    $article['tages'] = $datas['tags'];
+    $article['content'] = $articleToUpdate['content'];
+    $article['title'] = $articleToUpdate['title'];
+    $article['tags'] = $articleToUpdate['tags'];
     $article['updated_at'] = new \MongoDate();
-    $this->_collection->save($article, array('safe' => true));
-    return $article;
+    $this->_collection->save($article,array('safe' => true));
+    return new Article($article);
   }
 
   function remove($article_id) {
+
     $this->_collection->remove(array('_id' => new MongoId($article_id)));
   }
 
@@ -57,6 +59,7 @@ class ArticleManager extends BaseManager {
   }
 
   function getByUserId($user_id) {
+
     return $this->getArticles(array("created_at" => -1), array("user_id" => new MongoId($user_id)));
   }
 
@@ -89,8 +92,8 @@ class ArticleManager extends BaseManager {
   }
 
   /**
-  *@return array
-  */
+    *@return array
+    */
   function getFirstThreeArticles(){
     $cursor = $this->getArticles(array("created_at"=>-1),array(),false);
     $articles = $cursor->limit(3);

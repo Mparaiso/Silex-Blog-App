@@ -3,7 +3,7 @@
 	font-family: 'Hermes';
 	src: url('fonts/Hermes-Bold.eot');
 	src: local('☺'), url('fonts/Hermes-Bold.woff') format('woff'), url('fonts/Hermes-Bold.ttf') format('truetype'), url('fonts/Hermes-Bold.svg') format('svg');
-	font-weight: bolder;
+	font-weight: bold;
 	font-style: normal;
 }
 

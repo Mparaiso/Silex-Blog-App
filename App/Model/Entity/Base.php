@@ -57,15 +57,19 @@ abstract class Base implements \ArrayAccess {
     return ob_get_clean();
   }
 
+  /**
+   * get properties as an associative array 
+   * and trim null value
+   * @see http://briancray.com/posts/remove-null-values-php-arrays
+   */
   function toArray(){
-    $array=array();
-    $array['created_at']=$this->created_at;
-    $array['updated_at']=$this->updated_at;
+    
+    $array = @array_filter( get_object_vars($this) , 'strlen');
     return $array;
   }
 
   function serialize(){
-    return json_encode((array)$this);
+    return json_encode($this->toArray());
   }
 
   function deszerialize($json){

@@ -16,20 +16,5 @@ class User extends Base{
 	protected $userNonExpired=true;
 	protected $credentialsNonExpired=true;
   	protected $userNonLocked=true;
-  	static protected $properties = array(
-  		'_id',"username","firstname",'lastname',"password","address",
-  		"email","roles","enabled","userNonLocked","userNonExpired",
-  		"credentialsNonExpired"
-  	);
-
-  	function toArray(){
-  		$array = parent::toArray();
-		foreach ( self::$properties as $value) {
-			if($value!=null):
-				$array[$value]=$this->$value;
-			endif;
-		}
-		return $array;
-  	}
 
 }

@@ -13,9 +13,14 @@ class Article extends Base {
   protected $category_ids = array();
   protected $user_id;
   protected $type = "article";
+  protected $update_count = 0;
   /**
   * States if the article appears on the homepage
   */
   protected $isFeatured=true;
+
+  function getType(){
+    return "article";
+  }
 
 }
