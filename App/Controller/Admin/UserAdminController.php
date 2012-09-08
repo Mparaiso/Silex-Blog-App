@@ -32,7 +32,7 @@ class UserAdminController implements ControllerProviderInterface {
   }
 
   function getDashboard(Application $app){
-    
+    return;
   }
 
 }
