@@ -31,4 +31,8 @@ class UserAdminController implements ControllerProviderInterface {
     return $app['twig']->render('user/profile.twig', array('user' => $user));
   }
 
+  function getDashboard(Application $app){
+    
+  }
+
 }
