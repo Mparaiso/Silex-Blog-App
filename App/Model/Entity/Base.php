@@ -7,7 +7,7 @@ abstract class Base implements \ArrayAccess {
   protected $created_at;
   protected $updated_at;
 
-  function __construct(array $data){
+  function __construct(array $data=array()){
     foreach ($data as $key => $value) {
       $this->__set($key,$value);
     }

@@ -65,7 +65,8 @@ $app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"local
 $app['config.database'] = getenv("MONGODB_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
 $app['config.site_title'] = "Mongo Blog";
 $app['config.default_user_role'] = "ROLE_WRITER";
-$app["mongo"] = $app->share(function($app) {
+$app["mongo"] = $app->share(
+        function($app) {
           return new Mongo($app['config.server']);
         }
 );
@@ -77,26 +78,33 @@ $app['session_manager'] = $app->share(function($app) {
 );
 # EN : defaut session storage handler overloading 
 # FR : surcharge du session.storage.handler
-$app['session.storage.handler'] = $app->share(function ($app) {
+$app['session.storage.handler'] = $app->share(
+        function ($app) {
           return $app['session_manager'];
         }
 );
-$app["gravatar"] = $app->share(function($app) {
+$app["gravatar"] = $app->share(
+        function($app) {
           return new App\Helper\Gravatar();
         });
 # user manager
-$app['user_manager'] = $app->share(function($app) {
-          $um = new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'], $app);
+$app['user_manager'] = $app->share(
+  function($app) {
+          $um = new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'],$app);
           return $um;
-        });
+  }
+);
 # article manager
-$app['article_manager'] = $app->share(function($app) {
+$app['article_manager'] = $app->share(
+  function($app) {
           return new \App\Model\Manager\ArticleManager($app['mongo'], $app['config.database']);
-        });
+  }
+);
 # comment manager
-$app['comment_manager'] = $app->share(function(Silex\Application $app) {
+$app['comment_manager'] = $app->share(
+  function(Silex\Application $app) {
           return new \App\Model\Manager\CommentManager($app["mongo"], $app["config.database"]);
-        }
+  }
 );
 # FILTERS
 # EN : check if the user owns the resource.
@@ -139,7 +147,7 @@ $app['user_infos'] = $app->share(function(Application $app) {
 # using symfony reverse proxy
 Request::trustProxyData();
 # FIREWALLS
-$app['security.firewalls'] = function(Application $app) {
+$app['security.firewalls'] = $app->share(function(Application $app) {
           return array(
               'admin' => array(
                   'pattern' => '^/',
@@ -169,23 +177,31 @@ $app['security.firewalls'] = function(Application $app) {
                           }),
               ),
           );
-        };
+        }
+);
 # EN : role hierarchy
 # FR : hierarchie des roles
-$app['security.role_hierarchy'] = function() {
+$app['security.role_hierarchy'] = $app->share(function() {
           return array(
               'ROLE_ADMIN' => array('ROLE_EDITOR'),
               "ROLE_EDITOR" => array('ROLE_WRITER'),
               "ROLE_WRITER" => array('ROLE_USER'),
               "ROLE_USER" => array("ROLE_SUSCRIBER"),
           );
-        };
+        }
+);
 # EN : define access rules
 # FR : définir les règles d'accès aux ressources
-$app['security.access_rules'] = function() {
+$app['security.access_rules'] = $app->share(function() {
           return array(
               array('^/admin', 'ROLE_USER'),
           );
-        };
-
+        }
+);
+$app->before(
+  function(Request $request)use($app){
+    $app['monolog']->addInfo(json_encode(array("ip"=>$request->getClientIp())));
+  }
+);
+$app->get('/mu-1234-cafe-5678-babe',function(){return 42;});
 return $app;

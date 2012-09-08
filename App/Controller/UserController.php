@@ -6,6 +6,9 @@ use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Security\Core\User\User as  AdvancedUser;
+use App\Model\Entity\User ;
+
 
 /**
  * Gère les utilisateurs de l'application.
@@ -55,12 +58,13 @@ class UserController implements ControllerProviderInterface {
       endif;
       if ($registrationForm->isValid()):
         # commit
-        $user = array();
+        $user = new User();
         $user['username'] = $datas['username'];
         $user['firstname'] = $datas['firstname'];
         $user['lastname'] = $datas['lastname'];
         $user['email'] = $datas['email'];
-        $user['password'] = $datas['password_repeated'];
+        $user['roles'] = array($app['config.default_user_role']); # must be an array
+        $user['password'] = self::encodePassword($user['username'],$datas['password_repeated'],$app);
         $userManager->registerUser($user);
         # add flash success
         $app['session']->setFlash('success', 'Your account was successfully created, please login');
@@ -75,6 +79,17 @@ class UserController implements ControllerProviderInterface {
     $app['session']->setFlash('success', "You are logged out!");
     $referer = $app['request']->headers->get('referer');
     return $app->redirect($referer != null ? $referer : $app['url_generator']->generate('index.index'));
+  }
+
+  /**
+  * Encode a password
+  * @return string
+  */
+  static function encodePassword($username,$nonEncodedPassword,$app){
+    $user = new  AdvancedUser($username, $nonEncodedPassword);
+    $encoder = $app['security.encoder_factory']->getEncoder($user);
+    $encodedPassword = $encoder->encodePassword($nonEncodedPassword, $user->getSalt());
+    return $encodedPassword;
   }
 
 
