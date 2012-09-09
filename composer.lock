@@ -1,5 +1,5 @@
 {
-    "hash": "4635b496ec1628bae52255e30ce37dff",
+    "hash": "2a084b7d3da656e7bd9e35be000a7ac0",
     "packages": [
         {
             "package": "fate/silex-extensions",
@@ -64,6 +64,18 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "v2.1.0"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "alias-pretty-version": "2.2.x-dev",
+            "alias-version": "2.2.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "dev-master",
+            "source-reference": "d282fd0073cfb98cd27c65b9e1e4a9372440f77a",
+            "commit-date": "1346957130"
         },
         {
             "package": "symfony/form",

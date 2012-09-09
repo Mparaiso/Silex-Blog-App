@@ -1,0 +1,4 @@
+<h3>{{article.title}}</h3>
+<p class="author"><small>{{app.user_manager.getById(article.user_id).username}}</small> <small>{{article.created_at.sec|date('m/d/Y')}}</small></p>
+<p>{{article.content|slice(1,300)}}...</p>
+<p><a href='{{ path('article.get',{'slug':article.slug})}}' class="btn btn-info">Read more</a></p>

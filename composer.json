@@ -13,6 +13,7 @@
     "symfony/config":"*",
     "symfony/class-loader":"*",
     "kriswallsmith/assetic":"1.*",
-    "fate/silex-extensions":"*"
+    "fate/silex-extensions":"*",
+    "symfony/finder":"*"
   }
 }

@@ -47,6 +47,15 @@ namespace App\Model\Manager{
       return new UserEntity($user);
     }
 
+    /**
+     * 
+     * @param string $user_id
+     * @return UserEntity
+     */
+    function getById($user_id){
+      return $this->getCollection()->findone(array("_id"=>new MongoId($user_id)));
+    }
+    
     function getByEmail($email){
       $user = $this->_collection->findone(array('email'=>$email));
       return new UserEntity($user);

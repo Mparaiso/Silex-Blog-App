@@ -17,7 +17,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2012-07-23 09:54:08",
+        "time": "2012-07-23 07:54:08",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -77,7 +77,7 @@
             "symfony/css-selector": "2.1.*",
             "symfony/dom-crawler": "2.1.*"
         },
-        "time": "2012-09-04 09:42:47",
+        "time": "2012-09-04 07:42:47",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -117,7 +117,7 @@
             "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
             "ext-mongo": "Allow sending log messages to a MongoDB server"
         },
-        "time": "2012-09-05 15:32:46",
+        "time": "2012-09-05 13:32:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -150,7 +150,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-30 10:49:05",
+        "time": "2012-08-30 08:49:05",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -195,7 +195,7 @@
             "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
             "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris"
         },
-        "time": "2012-09-07 15:38:04",
+        "time": "2012-09-07 13:38:04",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -227,7 +227,7 @@
         "require": {
             "php": ">=5.2.4"
         },
-        "time": "2012-09-07 11:42:22",
+        "time": "2012-09-07 09:42:22",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -268,7 +268,7 @@
             "symfony/config": "dev-master",
             "symfony/yaml": "dev-master"
         },
-        "time": "2012-09-06 16:45:30",
+        "time": "2012-09-06 14:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -318,7 +318,7 @@
             "symfony/yaml": "dev-master",
             "symfony/security": "dev-master"
         },
-        "time": "2012-09-06 16:45:30",
+        "time": "2012-09-06 14:45:30",
         "type": "symfony-bridge",
         "extra": {
             "branch-alias": {
@@ -361,7 +361,7 @@
             "symfony/yaml": "dev-master",
             "doctrine/common": ">=2.1,<2.4-dev"
         },
-        "time": "2012-09-06 16:45:30",
+        "time": "2012-09-06 14:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -394,7 +394,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-06 16:45:30",
+        "time": "2012-09-06 14:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -430,7 +430,7 @@
         "require-dev": {
             "symfony/finder": "2.2.*"
         },
-        "time": "2012-09-06 16:45:30",
+        "time": "2012-09-06 14:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -463,7 +463,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-22 13:48:41",
+        "time": "2012-08-22 11:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -499,7 +499,7 @@
         "suggest": {
             "ext-intl": ">=5.3.3"
         },
-        "time": "2012-08-22 13:48:41",
+        "time": "2012-08-22 11:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -539,7 +539,7 @@
             "symfony/dependency-injection": "v2.1.0",
             "symfony/http-kernel": "v2.1.0"
         },
-        "time": "2012-08-22 13:48:41",
+        "time": "2012-08-22 11:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -583,7 +583,7 @@
             "symfony/validator": "v2.1.0",
             "symfony/http-foundation": "v2.1.0"
         },
-        "time": "2012-08-31 12:34:27",
+        "time": "2012-08-31 10:34:27",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -627,7 +627,7 @@
             "symfony/yaml": "v2.1.0",
             "doctrine/common": ">=2.2,<2.4-dev"
         },
-        "time": "2012-09-05 15:44:14",
+        "time": "2012-09-05 13:44:14",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -660,7 +660,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-04 12:24:42",
+        "time": "2012-09-04 10:24:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -714,7 +714,7 @@
             "symfony/dependency-injection": "2.1.x-dev",
             "symfony/finder": "2.1.x-dev"
         },
-        "time": "2012-09-06 10:12:03",
+        "time": "2012-09-06 08:12:03",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -765,7 +765,7 @@
             "symfony/routing": "v2.1.0",
             "doctrine/dbal": "to use the built-in ACL implementation"
         },
-        "time": "2012-09-04 14:49:55",
+        "time": "2012-09-04 12:49:55",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -808,12 +808,45 @@
             "fate/gravatar-php": "*",
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-08-10 08:15:28",
+        "time": "2012-08-10 06:15:28",
         "type": "library",
         "installation-source": "source",
         "autoload": {
             "psr-0": {
                 "SilexExtension": "src"
+            }
+        }
+    },
+    {
+        "name": "symfony/finder",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Symfony/Component/Finder",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Finder",
+            "reference": "d282fd0073cfb98cd27c65b9e1e4a9372440f77a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/Finder/zipball/d282fd0073cfb98cd27c65b9e1e4a9372440f77a",
+            "reference": "d282fd0073cfb98cd27c65b9e1e4a9372440f77a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2012-09-06 18:45:30",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Finder": ""
             }
         }
     }

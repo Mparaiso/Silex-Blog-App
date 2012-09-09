@@ -1,0 +1,16 @@
+<form  action="{{action}} " method="post" {{ form_enctype(form)}} >
+	{{form_errors(form)}}
+  <legend>{{legend}}</legend>
+	{{form_row(form.title)}}
+	{{form_row(form.content)}}
+	{{form_row(form.tags)}}
+	<div>
+	<label class='checkbox'>
+    {{ form_errors(form.featured) }}
+    {{ form_widget(form.featured) }}
+    {{ form_label(form.featured) }}
+	</label>
+	<div>
+	{{form_rest(form)}}
+    <input class="btn" type="submit" name="submit">
+  </form>

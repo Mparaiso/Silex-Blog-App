@@ -1,8 +1,9 @@
 <?php
 
+namespace Lib\PEAA\DataAccess;
+
 require_once 'IDataAccessObject.php';
 
-namespace PEAA\DataAccess;
 
 use Mongo;
 use MongoId;

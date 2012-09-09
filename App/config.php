@@ -36,6 +36,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.options' => array('cache' => ROOT . '/../cache', 'strict_variables' => true)
         )
 );
+
 # form
 $app->register(new Silex\Provider\FormServiceProvider());
 # session

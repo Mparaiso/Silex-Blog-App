@@ -32,7 +32,7 @@
         {#@note @twig loop variable twig doc page 61 #}
           <td>{{loop.index+((current_page-1)*articles_per_pages)}}</td>
           <td title='{{article._id}}'><small>{{article._id}}</small></td>
-          <td>{{article.title|slice(0,200)}}</td>
+          <td><a href="{{path('article.get',{slug: article.slug})}}">{{article.title|slice(0,200)}}</a></td>
           <td>{{article.created_at.sec|date('m/d/Y')}}</td>
           <td><a href="{{path('article.get',{'slug':article.slug})}}">View</a> </td>
           <td><a href="{{path('admin.article.edit',{'id':article._id})}}">Edit</a></td>

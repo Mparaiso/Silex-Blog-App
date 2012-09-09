@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Form\Form;
 
 use App\Model\Entity\Article;
+use App\Form\ArticleForm;
 
 class ArticleAdminController implements ControllerProviderInterface {
 
@@ -58,7 +59,7 @@ class ArticleAdminController implements ControllerProviderInterface {
    * @return mixed
    */
   function create(Application $app) {
-    $this->form = $this->createArticleForm($app);
+    $this->form = $app['form.factory']->create(new ArticleForm());
     return $app["twig"]->render("article/create.twig", array("form" => $this->form->createView()));
   }
 
@@ -67,20 +68,22 @@ class ArticleAdminController implements ControllerProviderInterface {
    * @param \Silex\Application $app
    */
   public function post(Application $app) {
-    $this->form = $this->createArticleForm($app);
+    $this->form = $app['form.factory']->create(new ArticleForm());
     #@note @silex récupère les données post de la requète
     $this->form->bindRequest($app["request"]);
     #@note @silex valide le formulaire
     if ($this->form->isValid()):
       #@note @silex obtenir les données d'un formulaire.
-      $article = $this->form->getData();
-      $article['created_at'] = new \MongoDate();
-      $article['type'] = "article";
-      $article["author"] = "admin";
-      $article["slug"] = \App\Controller\Helper\String::slug($article["title"]) . " " . md5(date("r"));
-      $article["type"] = "article";
-      $article["update_count"] = 0;
+      $articleDatas = $this->form->getData();
+      $article = new Article();
       $user = $app['user_manager']->getUser();
+      $article->created_at = new \MongoDate();
+      $article->type = "article";
+      $article->slug = \App\Controller\Helper\String::slug($articleDatas["title"]) . "-" . md5(date("r"));
+      $article->update_count = 0;
+      $article->title=$articleDatas['title'];
+      $article->content=$articleDatas['content'];
+      $article->tags= explode(",",$articleDatas['tags']);
       $article_ = $app['article_manager']->insert($article, $user['_id']);
       $app["session"]->setFlash("success", "Article \"$article_[title]\" , $article_[_id] , saved !");
       return $app->redirect($app['url_generator']->generate("admin.article.dashboard"));
@@ -125,22 +128,6 @@ class ArticleAdminController implements ControllerProviderInterface {
     $status = $articles->remove(array("_id" => new \MongoId($id)), array("safe" => true));
     $app["session"]->setFlash("success", "Article $id deleted! ");
     return $app->redirect($app["url_generator"]->generate('article.dashboard'));
-  }
-
-  /**
-   *
-   * @param \Silex\Application $app
-   * @param type $data
-   * @return Form
-   */
-  public function createArticleForm(Application $app, $data = array()) {
-    #@NOTE @SILEX créer un formulaire
-    $form = $app["form.factory"]->createBuilder("form", $data)
-            ->add("title", "text", array("required" => true, "attr" => array("class" => "span4", "placeholder" => "The title")))
-            ->add("content", "textarea", array("required" => true, "attr" => array("placeholder" => "the content", "rows" => 4, "class" => "span4")))
-            ->add("tags", "text", array("attr" => array("class" => "span4", "placeholder" => "ms, apple ,samsung, nokia")))
-            ->getForm();
-    return $form;
   }
 
   /**
