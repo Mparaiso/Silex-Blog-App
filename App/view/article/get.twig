@@ -1,9 +1,18 @@
 {% extends "layout.twig"%}
 {% block content %}
 <h2>{{article.title}}</h2>
-<p>
-	{{article.content}}
-</p>
+<div class="row-fluid">
+  <div class="span8">
+  	{{article.content}}
+  </div>
+</div>
+<hr/>
+<div class='row-fluid'>
+{% if article.tags %}
+{% include 'article/tags/index.twig' with {tags: article.tags} only %}
+{% endif %}
+</div>
+<hr/>
 <div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
 <div>{{render(path("comment.create",{'article_id': article._id}))}}</div>
 {% endblock %}

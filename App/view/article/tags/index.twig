@@ -1,0 +1,5 @@
+	{% for tag in tags %}
+	<a class='btn btn-mini' href="{{ path("article.getbytag",{tag: tag|trim()|lower()|url_encode()}) }}">
+		<span class='muted'>{{tag}}</span>
+	</a>
+	{% endfor %}

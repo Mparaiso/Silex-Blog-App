@@ -18,9 +18,12 @@ class ArticleController implements ControllerProviderInterface {
   public function connect(Application $app) {
     // créer un nouveau controller basé sur la route par défaut
     $article = $app['controllers_factory'];
-    $article->get('/feature/{ids}', 'App\Controller\ArticleController::getFeaturedArticles')->bind("article.featured");
-    $article->match("/", 'App\Controller\ArticleController::index')->bind("article.index");
-    $article->get("/slug/{slug}", 'App\Controller\ArticleController::getBySlug')->bind("article.get");
+    $article->get('/feature/{ids}', array($this,getFeaturedArticles) )->bind("article.featured");
+    #$article->match("/", 'App\Controller\ArticleController::index')->bind("article.index");
+    $article->match("/", array($this,index))->bind("article.index");
+    $article->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
+    $article->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")
+      ->convert( 'tag',function($tag){return urldecode($tag);} );
     return $article;
   }
 
@@ -40,6 +43,11 @@ class ArticleController implements ControllerProviderInterface {
       return $app->redirect($app["url_generator"]->generate("article.index"));
     endif;
     return $app["twig"]->render("article/get.twig", array("article" => $article));
+  }
+
+  function getByTag(Application $app,$tag){
+    $articles = $app['article_manager']->getByTag($tag);
+    return $app['twig']->render("article/getbytag.twig",array("tag"=>$tag,'articles'=>$articles));
   }
 
   function paginator($items, $current_page = null, $item_per_page = 5) {

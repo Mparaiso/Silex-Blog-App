@@ -129,13 +129,6 @@ class ArticleAdminController implements ControllerProviderInterface {
     return $app->redirect($app["url_generator"]->generate('article.dashboard'));
   }
 
-
-  function getDb(Application $app) {
-    $connection = $app["mongo"];
-    $db = $connection->selectDB($app["config"]::DATABASE);
-    return $db;
-  }
-
   function getDashboard(Application $app) {
 
     $current_page = $app['request']->get("current_page") ? (int) $app['request']->get("current_page") : 1;

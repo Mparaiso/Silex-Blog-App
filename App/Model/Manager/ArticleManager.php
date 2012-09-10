@@ -54,6 +54,13 @@ namespace App\Model\Manager{
       return $article;
     }
 
+    function getByTag($tag){
+      $app = require ROOT.'/App/config.php';
+      $app['monolog']->addInfo("tag : $tag");
+      $articles = $this->getCollection()->find( array('tags'=>array('$in'=>array($tag))) );
+      return $articles;
+    }
+
     function getByUserId($user_id) {
 
       return $this->getArticles(array("created_at" => -1), array("user_id" => new MongoId($user_id)));
