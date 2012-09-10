@@ -1,8 +1,8 @@
 <?php
 #error_reporting(E_ALL);
-const ROOT = __DIR__;
+define('ROOT',dirname(__DIR__));
 
-$loader = require dirname(ROOT)."/vendor/autoload.php";
+$loader = require ROOT."/vendor/autoload.php";
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,13 +27,13 @@ $app['debug'] = true;
 # autoloader
 $app['autoloader'] = $app->share(function()use($loader){return $loader;});
 # paramètrer l'autoloader.
-$app['autoloader']->add("App", dirname(ROOT));
-$app['autoloader']->add("Lib", dirname(ROOT));
+$app['autoloader']->add("App",ROOT);
+$app['autoloader']->add("Lib",ROOT);
 # providers
 # twig
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    "twig.path" => ROOT . "/view",
-    'twig.options' => array('cache' => ROOT . '/../cache', 'strict_variables' => true)
+    "twig.path" => ROOT . "/App/view",
+    'twig.options' => array('cache' => ROOT.'/cache', 'strict_variables' => true)
         )
 );
 
@@ -56,7 +56,7 @@ $app['monolog.handler'] = $app->share(function(Application $app){
 $app->register(new Silex\Provider\SecurityServiceProvider());
 # cache
 $app->register(new Silex\Provider\HttpCacheServiceProvider());
-$app['cache.path'] = ROOT . '/../cache';
+$app['cache.path'] = ROOT . '/cache';
 $app['http_cache.cache_dir'] = $app['cache.path'];
 # CUSTOM SERVICES
 $app['root']="";

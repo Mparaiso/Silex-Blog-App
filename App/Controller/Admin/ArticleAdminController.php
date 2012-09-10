@@ -26,8 +26,7 @@ class ArticleAdminController implements ControllerProviderInterface {
     #@note @silex nommer une route named route (doc page 13)
     $article->post("/post", 'App\Controller\Admin\ArticleAdminController::post')->bind("admin.article.post");
     #update
-    $article->get("/edit/{id}", 'App\Controller\Admin\ArticleAdminController::edit')->bind("admin.article.edit")->before($app["filter.mustbeowner"]);
-    $article->post("/put/{id}", 'App\Controller\Admin\ArticleAdminController::put')->bind('admin.article.put')->before($app["filter.mustbeowner"]);
+    $article->match("/edit/{id}", 'App\Controller\Admin\ArticleAdminController::edit')->bind("admin.article.edit")->before($app["filter.mustbeowner"]);
     #delete
     $article->get("/delete/{id}", 'App\Controller\Admin\ArticleAdminController::delete')->bind("admin.article.delete")->before($app["filter.mustbeowner"]);
     #dashboard
@@ -83,7 +82,8 @@ class ArticleAdminController implements ControllerProviderInterface {
       $article->update_count = 0;
       $article->title=$articleDatas['title'];
       $article->content=$articleDatas['content'];
-      $article->tags= explode(",",$articleDatas['tags']);
+      #$article->tags= explode(",",$articleDatas['tags']);
+      $article->tags= $articleDatas['tags'];
       $article_ = $app['article_manager']->insert($article, $user['_id']);
       $app["session"]->setFlash("success", "Article \"$article_[title]\" , $article_[_id] , saved !");
       return $app->redirect($app['url_generator']->generate("admin.article.dashboard"));
@@ -96,30 +96,29 @@ class ArticleAdminController implements ControllerProviderInterface {
 
   function edit(Application $app, $id) {
     $article = $app['article_manager']->getById($id);
-    $form = $this->updateArticleForm($app, $article, $id);
-    return $app["twig"]->render("article/edit.twig", array('article_id' => $id, 'article' => $article, 'form' => $form->createView()));
-  }
-
-  function put(Application $app, $id) {
-    $form = $this->updateArticleForm($app);
-    $form->bindRequest($app["request"]);
-    if ($form->isValid()):
-      $article = $app['article_manager']->getById($id);
-      $datas = $form->getData();
-      $articleEntity = new Article($article);
-      $articleEntity->title = $datas["title"];
-      $articleEntity->content = $datas["content"];
-      $articleEntity->updated_at = new \MongoDate();
-      $articleEntity->update_count++;
-      $article = $app['article_manager']->update($id,$articleEntity);
-      $app["session"]->setFlash("success", "the article was updated");
-      return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
+    $form = $app['form.factory']->create(new ArticleForm());
+    if("POST"===$app['request']->getMethod()):
+      $form->bindRequest($app["request"]);
+      if ($form->isValid()):
+        $article = $app['article_manager']->getById($id);
+        $datas = $form->getData();
+        $articleEntity = new Article($article);
+        $articleEntity->title = $datas["title"];
+        $articleEntity->content = $datas["content"];
+        $articleEntity->updated_at = new \MongoDate();
+        $articleEntity->update_count++;
+        $articleEntity->featured = $datas['featured'];
+        $articleEntity->tags=$datas['tags'];
+        $app['article_manager']->update($id,$articleEntity);
+        $app["session"]->setFlash("success", "the article was updated");
+        return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
+      else:
+        $app["session"]->setFlash("error", "the form contains errors");
+      endif;
     else:
-      $app["session"]->setFlash("error", "the form contains errors");
-      $request = $app["request"];
-      $subrequest = $request::create($app["url_generator"]->generate("article.edit", array("id" => $id)), "GET");
-      return $app->handle($subrequest, HttpKernelInterface::SUB_REQUEST);
+        $form = $app['form.factory']->create(new ArticleForm(),$article);
     endif;
+      return $app["twig"]->render("article/edit.twig", array('article_id' => $id, 'article' => $article, 'form' => $form->createView()));
   }
 
   function delete(Application $app, $id) {
@@ -130,20 +129,6 @@ class ArticleAdminController implements ControllerProviderInterface {
     return $app->redirect($app["url_generator"]->generate('article.dashboard'));
   }
 
-  /**
-   *
-   * @param \Silex\Application $app
-   * @param type $data
-   * @param type $id
-   * @return Form
-   */
-  public function updateArticleForm(Application $app, $data = array(), $id = null) {
-    $form = $this->createArticleForm($app, $data);
-    $form->add($app["form.factory"]->createBuilder("form", array("id" => $id))
-                    ->add("id", "hidden", array("required" => true))
-                    ->getForm());
-    return $form;
-  }
 
   function getDb(Application $app) {
     $connection = $app["mongo"];

@@ -1,7 +1,9 @@
 {% extends "layout.twig"%}
 {% block content %}
 <h2>{{article.title}}</h2>
-<p>{{article.content}}</p>
+<p>
+	{{article.content}}
+</p>
 <div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
 <div>{{render(path("comment.create",{'article_id': article._id}))}}</div>
 {% endblock %}

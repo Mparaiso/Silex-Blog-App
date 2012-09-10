@@ -63,8 +63,9 @@ abstract class Base implements \ArrayAccess {
    * @see http://briancray.com/posts/remove-null-values-php-arrays
    */
   function toArray(){
-    
-    $array = @array_filter( get_object_vars($this) , 'strlen');
+    $array = @array_filter( get_object_vars($this) ,function($value){
+      return $value!=null;
+    });
     return $array;
   }
 

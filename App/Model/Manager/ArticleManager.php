@@ -30,17 +30,13 @@ namespace App\Model\Manager{
      * 
      * @param type $article_id
      * @param array $datas
-     * @return array
+     * @return Article
      */
-    function update($article_id,Article $articleToUpdate) {
-      $article = $this->getById($article_id);
-      $article['type'] = 'article';
-      $article['content'] = $articleToUpdate['content'];
-      $article['title'] = $articleToUpdate['title'];
-      $article['tags'] = $articleToUpdate['tags'];
-      $article['updated_at'] = new \MongoDate();
-      $this->_collection->save($article,array('safe' => true));
-      return new Article($article);
+    function update($article_id,Article $article) {
+      $article->updated_at = new \MongoDate();
+      unset($article['_id']);
+      $this->_collection->update(array('_id'=>new MongoId($article_id)),$article->toArray(),array('safe' => true));
+      return $article;
     }
 
     function remove($article_id) {
@@ -87,7 +83,6 @@ namespace App\Model\Manager{
         $article = $this->_collection->findOne(array('_id' => new MongoId($value)));
         if(!empty($article)) $articles[]=$article;
       }
-      #$r = iterator_to_array( $this->_collection->find(array('_id'=>array('$in'=>$ids))));
       return $articles;
     }
 

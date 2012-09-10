@@ -27,5 +27,6 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
+    'Decoda' => $vendorDir . '/mjohnson/decoda/decoda',
     'Assetic' => $vendorDir . '/kriswallsmith/assetic/src/',
 );

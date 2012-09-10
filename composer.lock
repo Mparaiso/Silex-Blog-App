@@ -1,5 +1,5 @@
 {
-    "hash": "2a084b7d3da656e7bd9e35be000a7ac0",
+    "hash": "89696e0d3db398c407d6b0dae97e14dd",
     "packages": [
         {
             "package": "fate/silex-extensions",
@@ -18,6 +18,12 @@
             "version": "dev-master",
             "source-reference": "dfbb776288baf9319d1693195af2cb6e00729901",
             "commit-date": "1347039484"
+        },
+        {
+            "package": "mjohnson/decoda",
+            "version": "dev-master",
+            "source-reference": "67a328eaece2ff03b642bd013689feedadeb64da",
+            "commit-date": "1346478156"
         },
         {
             "package": "monolog/monolog",
@@ -64,12 +70,6 @@
         {
             "package": "symfony/event-dispatcher",
             "version": "v2.1.0"
-        },
-        {
-            "package": "symfony/finder",
-            "version": "dev-master",
-            "alias-pretty-version": "2.2.x-dev",
-            "alias-version": "2.2.9999999.9999999-dev"
         },
         {
             "package": "symfony/finder",

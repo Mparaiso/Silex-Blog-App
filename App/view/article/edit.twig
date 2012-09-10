@@ -1,9 +1,5 @@
 {% extends "layout.twig" %}
 {% block content %}
-<form  action="{{ path("admin.article.put",{'id':article_id})}} " method="post">
-  <legend>Update an article.</legend>
-	{{form_widget(form)}}
-  <input class="btn" type="submit" name="submit">
-</form>
+{% include 'form/article.twig' with {form: form,action: path('admin.article.edit',{id: article_id}),legend: 'Update an artile.'} only %}
 <div><small>Update count : {{article.update_count}}</small></div>
 {% endblock %}
