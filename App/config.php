@@ -198,5 +198,11 @@ $app->before(
     $app['monolog']->addInfo(json_encode(array("ip"=>$app['request']->getClientIp())));
   }
 );
-
+/*
+$app['silexblog.config']=array(
+  'article'=>array(
+    'allowed_tag'=>"<a>,<u>,<b>,<strong>,<small>,<i>,<li>,<ul>,<ol>,<img>"
+  )
+);
+*/
 return $app;

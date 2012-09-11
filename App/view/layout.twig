@@ -2,46 +2,25 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
   <head>
-    <meta charset="UTF-8">
-    <title>Mongo Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url('index.index')}}bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{url('index.index')}}bootstrap/css/bootstrap-responsive.min.css">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!-- styles -->
-    <style>
-        body{
-          /*padding-top: 60px;*/
-          font-family:Tahoma,Verdana,Arial,sans;
-          color:#444;
-        }
-      </style>
-    </head>
-    <body>
-      {% include "main-nav.twig"%}
-        <div class="container">
-        {% macro display_alert(_class,message) %}
-        {% if message  %}
-            <div class='alert alert-{{_class|default('error')}}'><a class='close' data-dismiss='alert'>x</a>{{message}}</div>
-        {% endif %}
-        {% endmacro %}
-        {# appel de macro #}
-        {{ _self.display_alert("error",app.session.getFlash('error') ) }}
-        {{ _self.display_alert("success",app.session.flash("success")) }}
-        {% block content %}
-        {%endblock%}
-          </div>
-         <!-- <div class='well navbar-fixed-bottom'>-->
-          <div class='well'>
-            {% include 'footer.twig'%}
-          </div>
-         <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>-->
-          <script type="text/javascript" src="{{url('index.index')}}js/jquery.js"></script>
-          <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>-->
-          <script type="text/javascript" src="{{url('index.index')}}bootstrap/js/bootstrap.min.js"></script>
-          <link rel="stylesheet" href="{{url('index.index')}}css/style.css">
-        </body>
-      </html>
+    {% include 'head.twig' %}
+  </head>
+  <body>
+    {% include "main-nav.twig"%}
+    <div class="container">
+      {% include 'flash-message.twig' %}
+      {% block herounit %}
+      {% endblock %}
+      {% block content %}
+      {%endblock%}
+      {% block sidebar %}
+        {% include 'sidebar.twig' %}
+      {% endblock %}
+    </div>
+    <div class='well'>
+      {% include 'footer.twig'%}
+    </div>
+    <script type="text/javascript" src="{{url('index.index')}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{url('index.index')}}bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{url('index.index')}}css/style.css">
+  </body>
+</html>

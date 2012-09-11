@@ -1,9 +1,17 @@
 {% extends "layout.twig"%}
 {% block content %}
 <h2>{{article.title}}</h2>
+{% if is_granted('IS_AUTHENITCATED_FULLY') %}
+  {% set user = app.user_manager.getUser() %}
+  {% if app.article_manager.belongsTo(article._id,user._id) %}
+    <a class='btn btn-small' href="{{path('admin.article.edit',{id: article._id})}}">Edit</a>
+  {% endif %}
+{% endif %}
 <div class="row-fluid">
   <div class="span8">
-  	{{article.content}}
+  {% autoescape false %}
+    {{article.content|striptags('<a>,<b>,<u>,<small>,<strong>')}}
+  {% endautoescape %}
   </div>
 </div>
 <hr/>

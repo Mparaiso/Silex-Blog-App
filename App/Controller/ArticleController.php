@@ -18,8 +18,7 @@ class ArticleController implements ControllerProviderInterface {
   public function connect(Application $app) {
     // créer un nouveau controller basé sur la route par défaut
     $article = $app['controllers_factory'];
-    $article->get('/feature/{ids}', array($this,getFeaturedArticles) )->bind("article.featured");
-    #$article->match("/", 'App\Controller\ArticleController::index')->bind("article.index");
+    $article->get('/feature', array($this,getFeaturedArticles) )->bind("article.featured");
     $article->match("/", array($this,index))->bind("article.index");
     $article->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
     $article->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")
@@ -57,10 +56,9 @@ class ArticleController implements ControllerProviderInterface {
     return $items;
   }
 
-  function getFeaturedArticles(Application $app, $ids) {
-    $ids = json_decode($ids);
+  function getFeaturedArticles(Application $app) {
     $articles = $app['article_manager']->getFirstThreeArticles();
-    return $app['twig']->render('article/featured.twig', array('articles' => $articles));
+    return $app['twig']->render('article/featured.twig', array('articles' => $articles) );
   }
 
 }

@@ -22,15 +22,8 @@ class Article extends Base {
     return "article";
   }
 
-  function setTags($value){
-    if(value!=null):
-      if(is_string($value)):
-        $value = explode(",", $value);
-      elseif(!is_array($value)):
-        throw new Exception("Error $value must be an array", 1);
-      endif;
-      $this->tags = array_map(function($tag){return trim(strtolower($tag));}, $value);
-    endif;
+  function setTags(array $value){
+    $this->tags = $value;
   }
 
 }

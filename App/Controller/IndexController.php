@@ -13,7 +13,8 @@ namespace App\Controller{
         public $form = "this is a form";
 
         public function index(Application $app){
-            return $app["twig"]->render("index/index.twig",array("message"=>"homepage"));
+            $articles = $app['article_manager']->getArticles(/*sorting*/array('created_at'=>-1));
+            return $app["twig"]->render("index/index.twig",array('articles'=>$articles,"message"=>"homepage"));
         }
 
         public function about(Application $app){

@@ -9,9 +9,9 @@ namespace App\Form\DataTransformer{
      */
     function transform($tags){
       if(is_array($tags)):
-        return implode(",", $tags);
+        $tagCollection = implode(",", $tags);
       endif;
-        return $tags;
+      return $tagCollection;
     }
     /**
      * string to Array ( get back the form data )
