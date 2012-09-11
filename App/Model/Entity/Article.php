@@ -15,6 +15,7 @@ class Article extends Base {
   protected $type = "article";
   protected $update_count = 0;
   protected $featured;
+  protected $status;
   /**
   * States if the article appears on the homepage
   */

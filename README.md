@@ -2,6 +2,8 @@
 ## A blog engine powered with Silex and MongoDB in php
 ### this is a Silex showcase app written with php and Silex
 
+#### Author M.PARAISO
+
 ### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
 
 
@@ -15,6 +17,7 @@
 + articles management
   + create , update , delete articles
   + comments
+  + tags
 
 + Symfony modules :
 	+ security
@@ -43,7 +46,20 @@ install with composer :
 
 + use a local MongoDB server (localhost) , the name of the database is by default mongoblog OR set the envirronment variables on your server MONGODB_SERVER and MONGODB_DATABASE ( in a .htaccess file with SetEnv for instance ).
 
+###TODO
 
++ configuration support
++ comment spam management
++ category management
++ pages management
++ fully featured content editor 
++ content backup
++ installation script
++ RDBMS support
++ embedded content support
++ short code support
++ templates support
++ menu management
 
 ### get some help : mparaiso@online.fr
 #### please contribute , fork , refactor and make pull request ;)
