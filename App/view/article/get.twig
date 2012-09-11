@@ -1,6 +1,7 @@
 {% extends "layout.twig"%}
 {% block content %}
 <h2>{{article.title}}</h2>
+<h1>&nbsp;</h1>
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
   {% set user = app['user_manager'].getUser() %}
   {% if app['article_manager'].belongsTo(article._id,user._id) %}
@@ -10,7 +11,7 @@
 <div class="row-fluid">
   <div class="span8">
   {% autoescape false %}
-    {{article.content|striptags('<a>,<b>,<u>,<small>,<strong>')}}
+    {{article.content|striptags(app['silexblog.config.allowedTags'])}}
   {% endautoescape %}
   </div>
 </div>

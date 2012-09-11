@@ -1,4 +1,33 @@
-<ul class='dropdown-menu'>
-  <li><a href="{{ path('admin.user.profile')}}">Profile</a></li>
-  <li><a href="{{ path('admin.article.dashboard')}}">Dashboard</a></li>
+<ul class="nav pull-right">
+	 {% if app.user_manager.isLoggedIn() %} 
+	  {% set local_user = app.user_manager.getUser() %}
+	<li>
+	  <a class='disable' >
+		Welcome back {{local_user.username|capitalize}}.
+	  </a>
+	</li>
+	<li>
+	  <div class="btn-group">
+		<a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+		  User menu&nbsp;
+		  <span class="caret"></span>
+		</a>
+		<!-- dropdown menu links -->
+		  <ul class='dropdown-menu'>
+				<li><a href="{{ path('admin.user.profile')}}">Profile</a></li>
+				<li><a href="{{ path('admin.article.dashboard')}}">Dashboard</a></li>
+		</ul>
+	  </div>
+	</li>
+	<li>
+	  <a  href="{{path('admin_user_logout')}}">Logout</a>
+	</li>
+	  {% else %}
+	<li>
+	  <a  href="{{path('user.login')}}">Login</a>
+	</li>
+	<li>
+	  <a  href="{{path('user.signup')}}">SignUp</a>
+	</li>
+	  {% endif %}
 </ul>

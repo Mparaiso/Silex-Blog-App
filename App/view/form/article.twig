@@ -12,6 +12,14 @@
 	</label>
 	<div>
 	{{form_rest(form)}}
-	<button class='btn'><a href="{{path('admin.article.dashboard')}}">Cancel</a> </button>
+	<button class='btn'><a href="{{path('admin.article.dashboard')}}">Cancel</a></button>
     <input class="btn btn-info" type="submit" name="submit">
   </form>
+  <script type="text/javascript" src='{{url('index.index')}}vendor/tiny_mce/tiny_mce.js'></script>
+  <script type="text/javascript">
+	tinyMCE.init({
+	content_css : "{{url('index.index')}}vendor/bootstrap/css/bootstrap.css",
+	mode : "textareas",
+	theme : "advanced"    //(n.b. no trailing comma, this will be critical as you experiment later)
+	});
+  </script>
