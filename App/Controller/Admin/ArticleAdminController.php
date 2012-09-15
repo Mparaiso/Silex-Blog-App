@@ -22,15 +22,15 @@ class ArticleAdminController implements ControllerProviderInterface {
     // créer un nouveau controller basé sur la route par défaut
     $article = $app['controllers_factory'];
 
-    $article->get("/create", 'App\Controller\Admin\ArticleAdminController::create')->bind("admin.article.create");
+    $article->get("/create", array($this,create))->bind("admin.article.create");
     #@note @silex nommer une route named route (doc page 13)
-    $article->post("/post", 'App\Controller\Admin\ArticleAdminController::post')->bind("admin.article.post");
+    $article->post("/post", array($this,post))->bind("admin.article.post");
     #update
-    $article->match("/edit/{id}", 'App\Controller\Admin\ArticleAdminController::edit')->bind("admin.article.edit")->before($app["filter.mustbeowner"]);
+    $article->match("/edit/{id}", array($this,edit))->bind("admin.article.edit")->before($app["filter.mustbeowner"]);
     #delete
-    $article->get("/delete/{id}", 'App\Controller\Admin\ArticleAdminController::delete')->bind("admin.article.delete")->before($app["filter.mustbeowner"]);
+    $article->get("/delete/{id}", array($this,delete))->bind("admin.article.delete")->before($app["filter.mustbeowner"]);
     #dashboard
-    $article->get('/dashboard', 'App\Controller\Admin\ArticleAdminController::getDashboard')->bind("admin.article.dashboard");
+    $article->get('/dashboard', array($this,getDashboard))->bind("admin.article.dashboard");    
     return $article;
   }
 
@@ -122,11 +122,9 @@ class ArticleAdminController implements ControllerProviderInterface {
   }
 
   function delete(Application $app, $id) {
-    $db = $this->getDb($app);
-    $articles = $db->selectCollection("article");
-    $status = $articles->remove(array("_id" => new \MongoId($id)), array("safe" => true));
+    $app['article_manager']->remove($id);
     $app["session"]->setFlash("success", "Article $id deleted! ");
-    return $app->redirect($app["url_generator"]->generate('article.dashboard'));
+    return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
   }
 
   function getDashboard(Application $app) {

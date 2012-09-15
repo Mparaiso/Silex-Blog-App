@@ -1,25 +1,31 @@
-<form  action="{{action}} " method="post" {{ form_enctype(form)}} >
+<script type="text/javascript" src='{{url('index.index')}}vendor/tiny_mce/tiny_mce.js'></script>
+<script type="text/javascript">
+tinyMCE.init({
+ content_css : "{{url('index.index')}}vendor/bootstrap/css/bootstrap.css",
+ mode : "textareas",
+ theme : "advanced" ,
+ // see http://stackoverflow.com/questions/6878362/symfony2-tinymcebundle
+ setup : function(ed) {
+  ed.onChange.add(function(ed, l) {
+    tinyMCE.activeEditor.getElement().value = tinyMCE.activeEditor.getContent();
+  })
+}
+});
+</script>
+<form  novalidate novalidation action="{{action}}" method="post" {{ form_enctype(form)}} >
 	{{form_errors(form)}}
   <legend>{{legend}}</legend>
-	{{form_row(form.title)}}
-	{{form_row(form.content)}}
-	{{form_row(form.tags)}}
-	<div>
-	<label class='checkbox'>
+  {{form_row(form.title)}}
+  {{form_row(form.content)}}
+  {{form_row(form.tags)}}
+  <div>
+   <label class='checkbox'>
     {{ form_errors(form.featured) }}
     {{ form_widget(form.featured) }}
     {{ form_label(form.featured) }}
-	</label>
-	<div>
-	{{form_rest(form)}}
-	<button class='btn'><a href="{{path('admin.article.dashboard')}}">Cancel</a></button>
-    <input class="btn btn-info" type="submit" name="submit">
-  </form>
-  <script type="text/javascript" src='{{url('index.index')}}vendor/tiny_mce/tiny_mce.js'></script>
-  <script type="text/javascript">
-	tinyMCE.init({
-	content_css : "{{url('index.index')}}vendor/bootstrap/css/bootstrap.css",
-	mode : "textareas",
-	theme : "advanced"    //(n.b. no trailing comma, this will be critical as you experiment later)
-	});
-  </script>
+  </label>
+  <div>
+   {{form_rest(form)}}
+   <button class='btn'><a href="{{path('admin.article.dashboard')}}">Cancel</a></button>
+   <input class="btn btn-info" type="submit" name="submit">
+ </form>

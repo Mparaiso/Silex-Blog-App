@@ -95,6 +95,11 @@ $app['user_manager'] = $app->share(
           return $um;
   }
 );
+$app['user_provider']=$app->share(
+  function($app){
+    return new App\Model\Provider\UserProvider($app['user_manager']);
+  }
+);
 # article manager
 $app['article_manager'] = $app->share(
   function($app) {
@@ -166,7 +171,7 @@ $app['security.firewalls'] = $app->share(function(Application $app) {
                       "delete_cookies" => array(
                           "mongoblog.local" => array("domain" => "mongoblog.local", "path" => "/")
                       )
-                  ),
+                  ),/** security.authentication_provider **/
                   'users' => $app->share(function(Application $app) {
                             return $app['user_manager'];
                           }),

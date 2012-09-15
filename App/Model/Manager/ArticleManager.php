@@ -22,8 +22,9 @@ namespace App\Model\Manager{
       $article->type= 'article';
       $article->created_at = new \MongoDate();
       $article->user_id = new \MongoId($user_id);
-      $this->_collection->insert($article->toArray(), array('safe' => true));
-      return $article;
+      $newArticle = $article->toArray();
+      $this->_collection->insert($newArticle, array('safe' => true));
+      return new Article($newArticle);
     }
 
     /**
@@ -40,7 +41,7 @@ namespace App\Model\Manager{
     }
 
     function remove($article_id) {
-
+      
       $this->_collection->remove(array('_id' => new MongoId($article_id)));
     }
 
@@ -77,7 +78,7 @@ namespace App\Model\Manager{
       if ($asArray == true):
         #@note @silex transformer un iterator en un array
         $articles = iterator_to_array($cursor);
-        return $articles;
+      return $articles;
       else:
         return $cursor;
       endif;

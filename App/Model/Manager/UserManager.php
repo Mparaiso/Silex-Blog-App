@@ -12,18 +12,20 @@ namespace App\Model\Manager{
   use MongoDate;
   use Symfony\Component\Security\Core\SecurityContext;
   use Symfony\Component\Security\Core\SecurityContextInterface;
+  use Exception;
 
-
-  class UserManager extends BaseManager implements UserProviderInterface {
+  class UserManager extends BaseManager implements UserProviderInterface{
 
     protected $collection = 'user';
     protected $_collection;
+    // protected $securityContent;
     protected $_app;
 
-    function __construct(\Mongo $connection,$database,$app) {
+    function __construct(\Mongo $connection,$database,Application $app) {
       parent::__construct($connection, $database);
       $this->_collection = $this->getCollection();
-      $this->_app=$app;
+      // $this->_securityContext = $securityContent;
+      $this->_app = $app;
     }
 
     function isLoggedIn() {
@@ -79,7 +81,7 @@ namespace App\Model\Manager{
       $token = $this->_app['security']->getToken();
       if (null != $token):
         $user = $token->getUser();
-        return $this->getByUsername($user->getUsername());
+      return $this->getByUsername($user->getUsername());
       endif;
     }
 
@@ -88,7 +90,7 @@ namespace App\Model\Manager{
     }
 
     /** UserProviderInterface * */
-
+    
     function loadUserByUsername($username) {
       $_user = $this->_collection->findone(array("username" => $username));
       if (empty($_user)):
@@ -109,7 +111,7 @@ namespace App\Model\Manager{
     function supportsClass($class) {
       return $class === 'Symfony\Component\Security\Core\User\User';
     }
-
+  
   }
 
 }

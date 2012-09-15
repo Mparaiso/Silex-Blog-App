@@ -18,7 +18,9 @@ namespace App\Form\DataTransformer{
      */
     function reverseTransform($tags){
       $tagCollection = explode(",", $tags);
-      $tagCollectionTrimmed = array_map(function($value){ return trim($value);},$tagCollection);
+      $tagCollectionTrimmed = array_map(function($value){ 
+        return trim(strtolower($value));
+      },$tagCollection);
       return $tagCollectionTrimmed;
     }
   }

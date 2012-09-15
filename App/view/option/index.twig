@@ -1,0 +1,11 @@
+{% extends 'layout.twig'%}
+{% block content %}
+{# option/index.twig #}
+<ul>
+  {% for option in options %}
+  <li>
+    {{ option['option_name'] }} : {{ option['option_value'] }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

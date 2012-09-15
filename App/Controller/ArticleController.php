@@ -16,13 +16,13 @@ class ArticleController implements ControllerProviderInterface {
   protected $form;
 
   public function connect(Application $app) {
-    // créer un nouveau controller basé sur la route par défaut
+      // créer un nouveau controller basé sur la route par défaut
     $article = $app['controllers_factory'];
     $article->get('/feature', array($this,getFeaturedArticles) )->bind("article.featured");
     $article->match("/", array($this,index))->bind("article.index");
     $article->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
     $article->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")
-      ->convert( 'tag',function($tag){return urldecode($tag);} );
+    ->convert( 'tag',function($tag){return urldecode($tag);} );
     return $article;
   }
 

@@ -3,23 +3,23 @@
 <h2>{{article.title}}</h2>
 <h1>&nbsp;</h1>
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-  {% set user = app['user_manager'].getUser() %}
-  {% if app['article_manager'].belongsTo(article._id,user._id) %}
-    <a class='btn btn-small' href="{{path('admin.article.edit',{id: article._id})}}">Edit</a>
-  {% endif %}
+{% set user = app['user_manager'].getUser() %}
+{% if app['article_manager'].belongsTo(article._id,user._id) %}
+<a class='btn btn-small' href="{{path('admin.article.edit',{id: article._id})}}">Edit</a>
+{% endif %}
 {% endif %}
 <div class="row-fluid">
   <div class="span8">
-  {% autoescape false %}
+    {% autoescape false %}
     {{article.content|striptags(app['silexblog.config.allowedTags'])}}
-  {% endautoescape %}
+    {% endautoescape %}
   </div>
 </div>
 <hr/>
 <div class='row-fluid'>
-{% if article.tags %}
-{% include 'article/tags/index.twig' with {tags: article.tags} only %}
-{% endif %}
+  {% if article.tags %}
+  {% include 'article/tags/index.twig' with {tags: article.tags} only %}
+  {% endif %}
 </div>
 <hr/>
 <div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
