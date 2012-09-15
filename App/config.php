@@ -138,7 +138,12 @@ $app['user_infos'] = $app->share(function(Application $app) {
         });
 # using symfony reverse proxy
 Request::trustProxyData();
-# FIREWALLS
+/** FIREWALLS
+ * EN : note : all the app must be behind the firewall
+ * the firewall must allow anonymous users 
+ * then you need to define credentials for some parts of the app behind the firewall
+ * with the security.access_rules container
+ */
 $app['security.firewalls'] = $app->share(function(Application $app) {
           return array(
               'admin' => array(
@@ -182,18 +187,22 @@ $app['security.role_hierarchy'] = $app->share(function() {
           );
         }
 );
-# EN : define access rules
-# FR : définir les règles d'accès aux ressources
+/**
+ * EN : define access rules
+ * FR : définir les règles d'accès aux ressources
+ */
 $app['security.access_rules'] = $app->share(function() {
           return array(
               array('^/admin', 'ROLE_USER'),
           );
         }
 );
+/** init monolog **/
 $app->before(
   function(Request $request)use($app){
     $app['monolog']->addInfo(json_encode(array("ip"=>$app['request']->getClientIp())));
   }
 );
+/** allowed tags for content rendering in the view **/
 $app['silexblog.config.allowedTags']='<a>,<b>,<u>,<small>,<strong>,<li>,<ol>,<ul>,<img>,<h3>,<h4>,<h5>,<h6>';
 return $app;

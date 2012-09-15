@@ -18,6 +18,10 @@ class Article extends Base {
   protected $status;
   protected $metadatas;
   /**
+   *@var string $status can be published unpublished
+   */
+  protected $status;
+  /**
   * States if the article appears on the homepage
   */
   function getType(){
