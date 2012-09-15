@@ -2,6 +2,9 @@
 ## A blog engine powered with Silex and MongoDB in php
 ### this is a Silex showcase app written with php and Silex
 
+#### WHY ? create a wordpress like CMS with a micro framework like SILEX
+#### Status : Work in progress
+
 #### Author M.PARAISO
 
 ### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
