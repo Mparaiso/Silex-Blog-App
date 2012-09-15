@@ -17,13 +17,16 @@ class ArticleController implements ControllerProviderInterface {
 
   public function connect(Application $app) {
       // créer un nouveau controller basé sur la route par défaut
-    $article = $app['controllers_factory'];
-    $article->get('/feature', array($this,getFeaturedArticles) )->bind("article.featured");
-    $article->match("/", array($this,index))->bind("article.index");
-    $article->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
-    $article->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")
+    $articleController = $app['controllers_factory'];
+    $articleController->get('/feature', array($this,getFeaturedArticles) )->bind("article.featured");
+    $articleController->match("/", array($this,index))->bind("article.index");
+    $articleController->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
+    $articleController->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")
     ->convert( 'tag',function($tag){return urldecode($tag);} );
-    return $article;
+    # get by username
+    $articleController->match('/user/{username}',array($this,getByUsername))->bind("article.getbyusername");
+
+    return $articleController;
   }
 
   /**
@@ -59,6 +62,11 @@ class ArticleController implements ControllerProviderInterface {
   function getFeaturedArticles(Application $app) {
     $articles = $app['article_manager']->getFirstThreeArticles();
     return $app['twig']->render('article/featured.twig', array('articles' => $articles) );
+  }
+
+  public function getByUsername(Application $app,$username)
+  {
+    # code...
   }
 
 }

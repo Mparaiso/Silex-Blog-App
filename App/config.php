@@ -125,14 +125,6 @@ $app['filter.mustbeowner'] = $app->protect(
           endif;
         }
 );
-# routes
-
-if ($app['debug'] == true):
-  $app->get('/info', function(Response $response, Request $request, Application $app) {
-            phpinfo();
-          }
-  );
-endif;
 
 $app['user_infos'] = $app->share(function(Application $app) {
           $user_infos = array();
