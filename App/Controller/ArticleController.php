@@ -8,12 +8,18 @@ use Silex\ControllerCollection;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Form\Form;
 
+use App\Model\Manager\IArticleManager;
+use App\Model\Manager\IUserManager;
+
 class ArticleController implements ControllerProviderInterface {
 
-  /**
-   * @var string
-   */
-  protected $form;
+  protected $articleManager;
+  protected $userManager;
+
+  function __construct(IArticleManager $articleManager,IUserManager $userManager){
+    $this->articleManager = $articleManager;
+    $this->userManager = $userManager;
+  }
 
   public function connect(Application $app) {
       // créer un nouveau controller basé sur la route par défaut
@@ -64,9 +70,18 @@ class ArticleController implements ControllerProviderInterface {
     return $app['twig']->render('article/featured.twig', array('articles' => $articles) );
   }
 
+  /**
+   * get all articles from user
+   * @param Application app a silex application
+   * @param string username the name of the user
+   * @return string
+   */
   public function getByUsername(Application $app,$username)
   {
-    # code...
+    $user = $app['user_manager']->getByUsername($username);// get user
+    $userId = $user['_id'];// get user id
+    $articles = $app['article_manager']->getByUserId($userId);// get articles by user id
+    return $app['twig']->render('article/getbyusername.twig',array('articles'=>$articles,'username'=>$user['username']));
   }
 
 }

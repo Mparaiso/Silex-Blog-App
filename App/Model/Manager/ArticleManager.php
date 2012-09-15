@@ -5,7 +5,7 @@ namespace App\Model\Manager{
   use MongoId;
   use App\Model\Entity\Article;
 
-  class ArticleManager extends BaseManager {
+  class ArticleManager extends BaseManager implements IArticleManager {
 
     protected $collection = "article";
 

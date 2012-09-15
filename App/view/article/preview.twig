@@ -3,7 +3,8 @@
 </h3>
 <p class="author">
 	<small>
-		{{app.user_manager.getById(article.user_id).username}}
+    {% set username = app.user_manager.getById(article.user_id).username %}
+    <a href="{{path('article.getbyusername',{username: username})}}">{{username}}</a>
 	</small> 
 	<small>
 		{{article.created_at.sec|date('m/d/Y')}}
