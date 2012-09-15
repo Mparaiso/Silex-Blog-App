@@ -14,7 +14,7 @@ namespace App\Model\Manager{
   use Symfony\Component\Security\Core\SecurityContextInterface;
   use Exception;
 
-  class UserManager extends BaseManager implements UserProviderInterface{
+  class UserManager extends BaseManager implements UserProviderInterface,IUserManager{
 
     protected $collection = 'user';
     protected $_collection;

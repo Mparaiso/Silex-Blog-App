@@ -5,7 +5,13 @@ namespace App\Model\Manager{
   use MongoId;
   use App\Model\Entity\Article;
 
-  interface ArticleManager{
+  /**
+   * EN: Manage access to the article persistance layer,
+   * encapsulate all database access
+   * FR : Gère l'acces à la couche de donnée des articles , 
+   * encapsule tout les accès à la base de donnée
+   */
+  interface IArticleManager{
 
     /**
      * check if an article belongs to a user
