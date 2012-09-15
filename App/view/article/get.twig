@@ -1,27 +1,40 @@
 {% extends "layout.twig"%}
 {% block content %}
 <h2>{{article.title}}</h2>
+
 <h1>&nbsp;</h1>
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-{% set user = app['user_manager'].getUser() %}
-{% if app['article_manager'].belongsTo(article._id,user._id) %}
-<a class='btn btn-small' href="{{path('admin.article.edit',{id: article._id})}}">Edit</a>
-{% endif %}
-{% endif %}
-<div class="row-fluid">
-  <div class="span8">
-    {% autoescape false %}
-    {{article.content|striptags(app['silexblog.config.allowedTags'])}}
-    {% endautoescape %}
-  </div>
-</div>
-<hr/>
-<div class='row-fluid'>
-  {% if article.tags %}
-  {% include 'article/tags/index.twig' with {tags: article.tags} only %}
+<p class="author">
+  <i class="icon-user"></i>
+  <small>
+    {% set username = app.user_manager.getById(article.user_id).username %}
+    <a href="{{path('article.getbyusername',{username: username})}}">{{username}}</a>
+    |
+    <i class="icon-calendar"></i>
+    {{article.created_at.sec|date('m/d/Y')}}
+    |
+    <i class="icon-comment"></i><a href='#comments'>{{ app['comment_manager'].getCommentsByArticleId(article._id)|length}} Comments</a></small>
+  </p>
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  {% set user = app['user_manager'].getUser() %}
+  {% if app['article_manager'].belongsTo(article._id,user._id) %}
+  <a class='btn btn-small' href="{{path('admin.article.edit',{id: article._id})}}">Edit</a>
   {% endif %}
-</div>
-<hr/>
-<div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
-<div>{{render(path("comment.create",{'article_id': article._id}))}}</div>
-{% endblock %}
+  {% endif %}
+  <div class="row-fluid">
+    <div class="span8">
+      {% autoescape false %}
+      {{article.content|striptags(app['silexblog.config.allowedTags'])}}
+      {% endautoescape %}
+    </div>
+  </div>
+  <hr/>
+  <div class='row-fluid'>
+    {% if article.tags %}
+    {% include 'article/tags/index.twig' with {tags: article.tags} only %}
+    {% endif %}
+  </div>
+  <hr/>
+  <a name='comments'></a>
+  <div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
+  <div>{{render(path("comment.create",{'article_id': article._id}))}}</div>
+  {% endblock %}
