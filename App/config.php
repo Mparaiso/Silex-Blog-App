@@ -113,11 +113,11 @@ $app['comment_manager'] = $app->share(
   }
   );
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/
-$app['option_manager']=$app->share( 
+$app['options']=$app->share( 
   function(Application $app){
     return new \App\Model\Manager\OptionManager($app['mongo'],$app['config.database']);
   }
-);
+  );
 # FILTERS
 # EN : check if the user owns the resource.
 # FR : vérifie si l'utilisateur est propriétaire de la resource.
@@ -131,6 +131,18 @@ $app['filter.mustbeowner'] = $app->protect(
     endif;
   }
   );
+
+$app['filter.mustbeadmin']=$app->protect(
+  
+  function(Request $request)use($app){
+    if(false===$app['security']->isGranted('ROLE_ADMIN')):
+      $user = $app['user_manager']->getUser();
+      $app['session']->setFlash('error','You cant access this resouce!');
+      $app['monolog']->addWarning('unauthorized access from user '.$user->username.' to '.$request->getRequestURI());
+      return $app->redirect($app['url_generator']->generate('index.index'));
+    endif;
+  }
+);
 
 $app['user_infos'] = $app->share(function(Application $app) {
   $user_infos = array();
@@ -174,12 +186,12 @@ $app['security.firewalls'] = $app->share(function(Application $app) {
         "delete_cookies" => array(
           "mongoblog.local" => array("domain" => "mongoblog.local", "path" => "/")
           )
-      ),/** security.authentication_provider **/
-    'users' => $app->share(function(Application $app) {
-      return $app['user_manager'];
-    }),
-    ),
-);
+        ),/** security.authentication_provider **/
+      'users' => $app->share(function(Application $app) {
+        return $app['user_manager'];
+      }),
+      ),
+    );
 }
 );
 # EN : role hierarchy
@@ -200,6 +212,7 @@ $app['security.role_hierarchy'] = $app->share(function() {
 $app['security.access_rules'] = $app->share(function() {
   return array(
     array('^/admin', 'ROLE_USER'),
+    array('^/admin/option','ROLE_ADMIN'),
     );
 }
 );

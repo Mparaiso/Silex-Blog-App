@@ -1,7 +1,7 @@
 <?php
 namespace App\Model\Manager{
   use App\Model\Entity\Option;
-  class OptionManager extends BaseManager{
+  class OptionManager extends BaseManager implements IOptionManager {
     /** @var string **/
     protected $collection="option";
 
@@ -17,6 +17,13 @@ namespace App\Model\Manager{
     {
       return $this->getCollection()
         ->findone(array("option_name"=>$name));
+    }
+
+    function get($name){
+      $option=$this->getByName($name);
+      if(!empty($option)){
+        return $option['option_value'];
+      }
     }
 
     function getById($id){

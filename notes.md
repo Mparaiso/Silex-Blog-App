@@ -27,3 +27,8 @@ liens :
 	+ Sonata : http://sonata-project.org/bundles/media/2-0/doc/index.html
 	+ assetic : http://symfony.com/doc/2.0/cookbook/assetic/asset_management.html
 
+### MONGODB
+
+@note @mongodb sauvegarder une base de donnée
++ en ligne de commande : mongodump --host my.host.com -d mydatabasename -u username -p password -v
+
