@@ -1,7 +1,9 @@
 <div>
 {% for comment in comments %}
+<img align='left' style='padding-right:10px;' src="{{app.gravatar.getGravatar(comment.email,50)}}" alt="">
 <div><strong>{{comment.name}}</strong></div>
 <div><small>{{comment.created_at.sec|date("r")}}</small></div>
 <p>{{comment.content}}</p>
+<hr>
 {% endfor %}
 </div>

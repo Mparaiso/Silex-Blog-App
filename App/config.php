@@ -18,6 +18,8 @@ use App\Controller\CommentController;
 use App\Controller\Admin\UserAdminController;
 use App\Controller\Admin\ArticleAdminController;
 
+use Net\Mpmedia\SilexExtension\Provider\GravatarServiceProvider;
+
 # bootstrap
 /**@var $app Silex\Application application **/
 $app = new Silex\Application();
@@ -56,6 +58,8 @@ $app['monolog.handler'] = $app->share(function(Application $app){
 $app->register(new Silex\Provider\SecurityServiceProvider());
 # cache
 $app->register(new Silex\Provider\HttpCacheServiceProvider());
+// Gravatar
+$app->register(new GravatarServiceProvider());
 $app['cache.path'] = ROOT . '/cache';
 $app['http_cache.cache_dir'] = $app['cache.path'];
 # CUSTOM SERVICES
@@ -84,10 +88,6 @@ $app['session.storage.handler'] = $app->share(
     return $app['session_manager'];
   }
   );
-$app["gravatar"] = $app->share(
-  function($app) {
-    return new App\Helper\Gravatar();
-  });
 # user manager
 $app['user_manager'] = $app->share(
   function($app) {
@@ -112,6 +112,14 @@ $app['comment_manager'] = $app->share(
     return new \App\Model\Manager\CommentManager($app["mongo"], $app["config.database"]);
   }
   );
+
+
+$app['spam_manager']=$app->share(
+  function(Silex\Application $app){
+    return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$__SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
+  }
+);
+
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/
 $app['options']=$app->share( 
   function(Application $app){

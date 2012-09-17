@@ -8,16 +8,27 @@ namespace App\Controller{
   use Symfony\Component\HttpKernel\HttpKernelInterface;
   use Symfony\Component\Form\Form;
 
+  use App\Model\Manager\ISpamManager;
+
   use Net\Mpmedia\Akismet\Akismet;
 
   class CommentController implements ControllerProviderInterface {
+    /**
+     * @var ISpamManager
+     */
+    protected $spamManager;
+
+    function __construct(ISpamManager $spamManager){
+      $this->spamManager = $spamManager;
+    }
 
     public function connect(Application $app) {
       $comment = $app["controllers_factory"];
-    #routes
-      $comment->get("/create/{article_id}", '\App\Controller\CommentController::create')->bind("comment.create");
-      $comment->post("/post/{article_id}", 'App\Controller\CommentController::post')->bind("comment.post");
-      $comment->match("/{article_id}", 'App\Controller\CommentController::index')->bind("comment.index");
+      //routes
+      $comment->get("/create/{article_id}", array($this,create))->bind("comment.create");
+      $comment->post("/post/{article_id}", array($this,post))->bind("comment.post");
+      $comment->match("/{article_id}", array($this,index))->bind("comment.index");
+      //$this->spamManager = $app['spam_manager'];
       return $comment;
     }
 
@@ -36,23 +47,19 @@ namespace App\Controller{
     public function post(Application $app,$article_id) {
       $commentForm = $app["form.factory"]->create(new \App\Form\Comment(), array());
       $commentForm->bindRequest($app["request"]);
-      if($commentForm->isValid()):
+      if($commentForm->isValid()){
         $commentManager = $app['comment_manager'];
-      $commentDatas = $commentForm->getData();
-      /** @var $comment App\Model\Entity\Comment **/
-      $comment = new \App\Model\Entity\Comment($commentDatas);
-      $comment->ip  = $app['request']->getClientIp();
-      $akismet = new Akismet($app['request']->getHost(),getenv("AKISMET_APIKEY"));
-      $akismet->commentAuthor = $comment->name;
-      $akismet->commentAuthorEmail = $comment->email;
-      $akismet->commentAuthorURL = $comment->url;
-      $akismet->commentContent = $comment->comment;
-      if(!$akismet->isSpam()): # if comment is not a spam
-      $status = $commentManager->insertComment($comment, $article_id);
-      $app["session"]->setFlash("success", "new comment added");
-      return $app->redirect($app['request']->headers->get('referer'));
-      endif; 
-      endif;
+        $commentDatas = $commentForm->getData();
+        /** @var $comment App\Model\Entity\Comment **/
+        $comment = new \App\Model\Entity\Comment($commentDatas);
+        $comment->ip  = $app['request']->getClientIp();
+        if(false===$this->spamManager->commentIsSpam($comment)){
+        // if comment is not a spam
+          $status = $commentManager->insertComment($comment, $article_id);
+          $app["session"]->setFlash("success", "new comment added");
+          return $app->redirect($app['request']->headers->get('referer'));
+        }
+      }
       $app["session"]->setFlash("error", "Error in the comment");
       return $app->redirect($app['request']->headers->get('referer'));
     }

@@ -1,5 +1,6 @@
 <?php
-namespace App\Helper{
+
+namespace Net\Mpmedia\Gravatar{
 
   class Gravatar{
     /**

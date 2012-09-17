@@ -15,10 +15,10 @@ namespace Net\Mpmedia\Akismet{
     protected $apiKey;
     protected $header = "Content-type: application/x-www-form-urlencoded";
     protected $method="POST";
-    protected $commentAuthor;
-    protected $commentAuthorEmail;
-    protected $commentAuthorURL;
-    protected $commentContent;
+    public $commentAuthor;
+    public $commentAuthorEmail;
+    public $commentAuthorURL;
+    public $commentContent;
     protected $commentUserAgent;
     protected $commentUserReferrer;
     protected $commentUserIp;
