@@ -1,0 +1,20 @@
+{# admin/left_sidebar.twig #}
+{% if is_granted('ROLE_WRITER') %}
+<div class='well span2'>
+  <ul class="nav nav-list">
+    <!-- <li class="nav-header">Dashboard</li> -->
+    <!-- <li class="active"><a href="#">Dashboard</a></li> -->
+    <li class='nav-header'>Dashboard</li>
+    <li><a href="{{ path('admin.user.profile') }}">Profile</a></li>
+    <li><a href="#">Account</a></li>
+    <li><a href="{{ path('admin.article.dashboard') }}">Articles</a></li>
+    {% if is_granted('ROLE_EDITOR') %}
+    <li><a href="#">Comments</a></li>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="#">Users</a></li>
+    <li><a href="{{ path('admin.option.index') }}">Options</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}

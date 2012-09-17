@@ -18,7 +18,7 @@ class BaseManager{
 	protected $collection;
 
 	/**
-	* @MongoCollection
+	* @var MongoCollection
 	*/
 	protected $_collection;
 

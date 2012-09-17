@@ -2,14 +2,17 @@
 namespace App\Model\Manager{
   use App\Model\Entity\Option;
   class OptionManager extends BaseManager{
+    /** @var string **/
+    protected $collection="option";
+
     /**
      * return \MongoCursor
      */
-    protected $_collection="option";
     function getAll(){
       return $this->getCollection()
         ->find();
     }
+
     function getByName($name)
     {
       return $this->getCollection()

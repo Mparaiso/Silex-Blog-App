@@ -15,8 +15,7 @@ class Article extends Base {
   protected $type = "article";
   protected $update_count = 0;
   protected $featured;
-  protected $status;
-  protected $metadatas;
+  protected $metadatas=array();
   /**
    *@var string $status can be published unpublished
    */

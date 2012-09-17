@@ -1,11 +1,17 @@
-{% extends 'layout.twig'%}
-{% block content %}
 {# option/index.twig #}
-<ul>
+{% extends 'admin/admin-layout.twig'%}
+{% block content %}
+<div class='span8'>
+  <h1>Options</h1>
+  <!-- <h1>&nbsp;</h1> -->
+  <hr/>
+{# @note  @css FR : faire une liste non stylée #}
+<ul class='unstyled'>
   {% for option in options %}
-  <li>
-    {{ option['option_name'] }} : {{ option['option_value'] }}
+  <li class='input-prepend input-append'>
+    <span class=' add-on' style='width:220px'>{{ option['option_name'] }}</span><input type='text' class='span6' value='{{ option['option_value'] }}'>
   </li>
   {% endfor %}
 </ul>
+</div>
 {% endblock %}

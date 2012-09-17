@@ -1,26 +1,28 @@
-{# layout principal #}
+{# layout.twig #}
 <!DOCTYPE HTML>
 <html lang="en-US">
-  <head>
-    {% include 'head.twig' %}
-  </head>
-  <body>
-    {% include "main-nav.twig"%}
-    <div class="container">
-      {% include 'flash-message.twig' %}
-      {% block herounit %}
-      {% endblock %}
-      {% block content %}
-      {%endblock%}
-      {% block sidebar %}
-        {% include 'sidebar.twig' %}
-      {% endblock %}
-    </div>
-    <div class='well'>
-      {% include 'footer.twig'%}
-    </div>
-    <script type="text/javascript" src="{{url('index.index')}}vendor/jquery/jquery.js"></script>
-    <script type="text/javascript" src="{{url('index.index')}}vendor/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{{url('index.index')}}css/style.css">
-  </body>
+<head>
+  {% include 'head.twig' %}
+</head>
+<body>
+  {% include "main-nav.twig"%}
+  <div class="container">
+    {% include 'flash-message.twig' %}
+    {% block herounit %}
+    {% endblock %}
+    {% block left_sidebar %}
+    {% endblock %}
+    {% block content %}
+    {%endblock%}
+    {% block right_sidebar %}
+    {% include 'sidebar.twig' %}
+    {% endblock %}
+  </div>
+  <div class='well'>
+    {% include 'footer.twig'%}
+  </div>
+  <script type="text/javascript" src="{{url('index.index')}}vendor/jquery/jquery.js"></script>
+  <script type="text/javascript" src="{{url('index.index')}}vendor/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{url('index.index')}}css/style.css">
+</body>
 </html>

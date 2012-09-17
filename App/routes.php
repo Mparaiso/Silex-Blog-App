@@ -19,6 +19,7 @@ namespace App\Controller{
   $app->mount('/user', new UserController());
   $app->mount('/admin/user', new Admin\UserAdminController());
   $app->mount('/admin/article',new Admin\ArticleAdminController());
+  $app->mount('/admin/option',new Admin\OptionAdminController());
 
   return $app;
 }

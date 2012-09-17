@@ -1,20 +1,22 @@
-{% extends 'layout.twig' %}
+{% extends 'admin/admin-layout.twig' %}
 {% block content %}
-<div class="page-header"><h1>User profile</h1></div>
-<div class="well">
-  <div class='row'>
-<div class='span3'>
-   <img src="{{app.gravatar.getGravatar(user.email,100)|default(url('index.index')~'/img/default.gif')}}" alt="avatar" title='{{user.username}}'><br/>
- <adress>
-  <strong>{{user.username|capitalize}}</strong><br/>
-  {{user.firstname ~" "~user.lastname|capitalize}}<br/>
-  {{user.email}}<br/>
-  {{user.adress.country|default('')}}<br/>
-</adress>
-</div>
-<div class='span8'>
-  user form details
-</div><!-- end details -->
-</div><!-- end row -->
+<div class="span8">
+  <div class="page-header"><h1>User profile</h1></div>
+  <div class="well">
+    <div class='row'>
+      <div class='span3'>
+       <img src="{{app.gravatar.getGravatar(user.email,100)|default(url('index.index')~'/img/default.gif')}}" alt="avatar" title='{{user.username}}'><br/>
+       <adress>
+        <strong>{{user.username|capitalize}}</strong><br/>
+        {{user.firstname ~" "~user.lastname|capitalize}}<br/>
+        {{user.email}}<br/>
+        {{user.adress.country|default('')}}<br/>
+      </adress>
+    </div>
+    <div class='span8'>
+      user form details
+    </div><!-- end details -->
+  </div><!-- end row -->
 </div><!-- end well-->
+</div>
 {% endblock %}
