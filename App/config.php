@@ -91,8 +91,8 @@ $app['session.storage.handler'] = $app->share(
 # user manager
 $app['user_manager'] = $app->share(
   function($app) {
-    $um = new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'],$app);
-    return $um;
+    return new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'],$app);
+ 
   }
   );
 $app['user_provider']=$app->share(
