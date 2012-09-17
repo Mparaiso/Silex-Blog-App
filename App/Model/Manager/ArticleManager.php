@@ -59,6 +59,7 @@ namespace App\Model\Manager{
       $app = require ROOT.'/App/config.php';
       $app['monolog']->addInfo("tag : $tag");
       $articles = $this->getCollection()->find( array('tags'=>array('$in'=>array($tag))) );
+      $articles->sort(array('created_at'=>-1));
       return $articles;
     }
 

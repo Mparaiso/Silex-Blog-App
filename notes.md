@@ -1,9 +1,15 @@
-##A note documenting developpment related infos , in french only.
+### A note documenting developpment related infos , in french only.
 roles :
 + ROLE_ADMIN
 + ROLE_EDITOR
 + ROLE_WRITER
-+ ROTE_ANONYMOUS
++ ROLE_SUSCRIBER
++ ROLE_ANONYMOUS
+
+### status des articles
++ published
++ unpublished
++ draft
 
 liens :
 + Twitter bootstrap : http://twitter.github.com/bootstrap/scaffolding.html
@@ -20,3 +26,4 @@ liens :
 + Symfony :
 	+ Sonata : http://sonata-project.org/bundles/media/2-0/doc/index.html
 	+ assetic : http://symfony.com/doc/2.0/cookbook/assetic/asset_management.html
+

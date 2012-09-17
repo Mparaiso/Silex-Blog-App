@@ -13,6 +13,9 @@ namespace App\Controller{
 
   class ArticleController implements ControllerProviderInterface {
 
+    /**
+     * @var IArticleManager
+     */
     protected $articleManager;
     protected $userManager;
 

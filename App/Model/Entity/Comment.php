@@ -2,23 +2,18 @@
 
 namespace App\Model\Entity;
 
-class Comment{
-
+class Comment extends Base{
+  protected $_id;
+  protected $_rev;
 	protected $name;
 	protected $email;
-	protected $comment;
-	protected $created_at;
-
-	function __get($name){
-		if(property_exists(self, $name)):
-			return $this->$name;
-		endif;
-	}
-
-	function __set($name,$value){
-		if(property_exists(self, $name)):
-			$this->$name = $value;
-			return $this->$name;
-		endif;
-	}
+	protected $content;
+	protected $url;
+	protected $ip;
+  protected $article_id;
+  protected $type='comment';
+  protected $approved='true';
+  protected $published='true';
+  protected $created_at;
+  protected $updated_at;
 }

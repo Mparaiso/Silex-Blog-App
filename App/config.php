@@ -29,7 +29,7 @@ $app['debug'] = true;
 $app['autoloader'] = $app->share(function()use($loader){return $loader;});
 # paramètrer l'autoloader.
 $app['autoloader']->add("App",ROOT);
-$app['autoloader']->add("Lib",ROOT);
+$app['autoloader']->add("Net",ROOT.'/Lib');
 # providers
 # twig
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -221,5 +221,5 @@ $app->before(
   }
   );
 /** allowed tags for content rendering in the view **/
-$app['silexblog.config.allowedTags']='<a>,<b>,<u>,<small>,<strong>,<li>,<ol>,<ul>,<img>,<h3>,<h4>,<h5>,<h6>';
+$app['silexblog.config.allowedTags']='<a>,<b>,<u>,<small>,<strong>,<li>,<ol>,<ul>,<img>,<h3>,<h4>,<h5>,<h6>,<p>';
 return $app;
