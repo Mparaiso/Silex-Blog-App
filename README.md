@@ -1,4 +1,4 @@
-#MONGOBLOG
+#Silex Blog
 ## A blog engine powered with Silex and MongoDB in php
 ### this is a Silex showcase app written with php and Silex
 
