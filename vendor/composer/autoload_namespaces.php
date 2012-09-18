@@ -22,6 +22,7 @@ return array(
     'Symfony\\Component\\Config' => $vendorDir . '/symfony/config/',
     'Symfony\\Component\\ClassLoader' => $vendorDir . '/symfony/class-loader/',
     'Symfony\\Bridge\\Twig' => $vendorDir . '/symfony/twig-bridge/',
+    'Symfony\\Bridge\\Monolog' => $vendorDir . '/symfony/monolog-bridge/',
     'SilexExtension' => $vendorDir . '/fate/silex-extensions/src',
     'Silex' => $vendorDir . '/silex/silex/src/',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs',

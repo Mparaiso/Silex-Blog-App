@@ -10,6 +10,7 @@
     "symfony/validator":"*",
     "symfony/security":"*",
     "monolog/monolog":"*",
+    "symfony/monolog-bridge":"*",
     "symfony/config":"*",
     "symfony/class-loader":"*",
     "kriswallsmith/assetic":"1.*",

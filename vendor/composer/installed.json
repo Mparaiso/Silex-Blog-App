@@ -21,7 +21,7 @@
         "require-dev": {
             "symfony/finder": "2.2.*"
         },
-        "time": "2012-09-06 10:45:30",
+        "time": "2012-09-06 08:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -64,7 +64,7 @@
             "fate/gravatar-php": "*",
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-08-10 02:15:28",
+        "time": "2012-08-10 00:15:28",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -92,7 +92,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-06 14:45:30",
+        "time": "2012-09-06 12:45:30",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -124,7 +124,7 @@
         "require": {
             "php": ">=5.3"
         },
-        "time": "2012-09-01 03:42:36",
+        "time": "2012-09-01 01:42:36",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -152,7 +152,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-22 13:48:41",
+        "time": "2012-08-22 11:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -188,7 +188,7 @@
         "suggest": {
             "ext-intl": ">=5.3.3"
         },
-        "time": "2012-08-22 13:48:41",
+        "time": "2012-08-22 11:48:41",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -228,7 +228,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/http-kernel": "2.1.*"
         },
-        "time": "2012-09-10 10:53:42",
+        "time": "2012-09-10 08:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -272,7 +272,7 @@
             "symfony/validator": "2.1.*",
             "symfony/http-foundation": "2.1.*"
         },
-        "time": "2012-09-10 10:53:42",
+        "time": "2012-09-10 08:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -305,7 +305,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-04 12:24:42",
+        "time": "2012-09-04 10:24:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -357,7 +357,7 @@
             "symfony/validator": "2.1.*",
             "symfony/routing": "2.1.*"
         },
-        "time": "2012-09-10 10:53:42",
+        "time": "2012-09-10 08:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -401,7 +401,7 @@
             "symfony/config": "2.1.*",
             "symfony/yaml": "2.1.*"
         },
-        "time": "2012-09-10 10:53:42",
+        "time": "2012-09-10 08:53:42",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -434,7 +434,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-08-30 12:49:05",
+        "time": "2012-08-30 10:49:05",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -466,7 +466,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2012-09-10 12:09:48",
+        "time": "2012-09-10 10:09:48",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -526,7 +526,7 @@
             "symfony/css-selector": "2.1.*",
             "symfony/dom-crawler": "2.1.*"
         },
-        "time": "2012-09-15 19:50:39",
+        "time": "2012-09-15 17:50:39",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -566,7 +566,7 @@
             "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
             "ext-mongo": "Allow sending log messages to a MongoDB server"
         },
-        "time": "2012-09-11 11:35:21",
+        "time": "2012-09-11 09:35:21",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -613,7 +613,7 @@
             "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
             "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
         },
-        "time": "2012-09-14 11:29:48",
+        "time": "2012-09-14 09:29:48",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -628,38 +628,6 @@
             "files": [
                 "src/functions.php"
             ]
-        }
-    },
-    {
-        "name": "twig/twig",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "git://github.com/fabpot/Twig.git",
-            "reference": "c38e06ff4134820f5acca2b5b0a163251b053d89"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://github.com/fabpot/Twig/zipball/c38e06ff4134820f5acca2b5b0a163251b053d89",
-            "reference": "c38e06ff4134820f5acca2b5b0a163251b053d89",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "time": "2012-09-16 14:38:44",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.10-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Twig_": "lib/"
-            }
         }
     },
     {
@@ -689,7 +657,7 @@
             "symfony/config": "2.2.*",
             "symfony/yaml": "2.2.*"
         },
-        "time": "2012-09-10 10:59:37",
+        "time": "2012-09-10 08:59:37",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -739,7 +707,7 @@
             "symfony/yaml": "2.2.*",
             "symfony/security": "2.2.*"
         },
-        "time": "2012-09-10 10:59:37",
+        "time": "2012-09-10 08:59:37",
         "type": "symfony-bridge",
         "extra": {
             "branch-alias": {
@@ -782,7 +750,7 @@
             "symfony/http-foundation": "2.2.*",
             "symfony/yaml": "2.2.*"
         },
-        "time": "2012-09-17 20:42:23",
+        "time": "2012-09-17 18:42:23",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -815,7 +783,7 @@
         "require": {
             "php": ">=5.3.3"
         },
-        "time": "2012-09-16 00:50:00",
+        "time": "2012-09-15 22:50:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -868,7 +836,7 @@
             "symfony/dependency-injection": "2.1.*",
             "symfony/finder": "2.1.*"
         },
-        "time": "2012-09-17 20:41:57",
+        "time": "2012-09-17 18:41:57",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -881,5 +849,105 @@
                 "Symfony\\Component\\HttpKernel": ""
             }
         }
+    },
+    {
+        "name": "symfony/monolog-bridge",
+        "version": "2.1.x-dev",
+        "version_normalized": "2.1.9999999.9999999-dev",
+        "target-dir": "Symfony/Bridge/Monolog",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/MonologBridge",
+            "reference": "v2.1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/symfony/MonologBridge/zipball/v2.1.1",
+            "reference": "v2.1.1",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "monolog/monolog": "1.*",
+            "symfony/http-kernel": "2.1.*"
+        },
+        "time": "2012-09-10 10:53:42",
+        "type": "symfony-bridge",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Bridge\\Monolog": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Monolog Bridge",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "twig/twig",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git://github.com/fabpot/Twig.git",
+            "reference": "e3e8b422c195f01b1a364126eff98adacfb9ff79"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/fabpot/Twig/zipball/e3e8b422c195f01b1a364126eff98adacfb9ff79",
+            "reference": "e3e8b422c195f01b1a364126eff98adacfb9ff79",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2012-09-18 05:04:46",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.10-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Twig_": "lib/"
+            }
+        },
+        "license": [
+            "BSD-3"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Armin Ronacher",
+                "email": "armin.ronacher@active-4.com"
+            }
+        ],
+        "description": "Twig, the flexible, fast, and secure template language for PHP",
+        "homepage": "http://twig.sensiolabs.org",
+        "keywords": [
+            "templating"
+        ]
     }
 ]

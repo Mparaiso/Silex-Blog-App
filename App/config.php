@@ -42,7 +42,15 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 # form
 $app->register(new Silex\Provider\FormServiceProvider());
 # session
-$app->register(new Silex\Provider\SessionServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider(),array(
+  'session.storage.handler'=>$app->share(
+    function(Application $app){
+        // EN : overloading defaut session storage handler  
+        // FR : surcharge du session.storage.handler
+      return $app['session_manager'];
+    }
+    )
+  ));
 # trans
 $app->register(new Silex\Provider\TranslationServiceProvider(), array("locale_fallback" => "en"));
 # url generator
@@ -50,20 +58,68 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 # validation
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 # monolog
-$app->register(new Silex\Provider\MonologServiceProvider(), array('monolog.logfile' => ROOT . '/../log/development.log', 'monolog.name' => 'mongoblog'));
-$app['monolog.handler'] = $app->share(function(Application $app){
-  return new Monolog\Handler\MongoDBHandler($app['mongo'],$app['config.database'],"log");
-});
-# security
-$app->register(new Silex\Provider\SecurityServiceProvider());
+$app->register(new Silex\Provider\MonologServiceProvider(), 
+  array(
+    'monolog.logfile' => ROOT . '/../log/development.log', 
+    'monolog.name' => 'mongoblog',
+    'monolog.handler'=> $app->share(
+      function(Application $app){
+        return new Monolog\Handler\MongoDBHandler($app['mongo'],$app['config.database'],"log");
+      }
+    ),
+  )
+);
+/** Security
+ * EN : note : all the app must be behind the firewall
+ * the firewall must allow anonymous users 
+ * then you need to define credentials for some parts of the app behind the firewall
+ * with the security.access_rules container
+ */
+$app->register(new Silex\Provider\SecurityServiceProvider(),array(
+  'security.firewalls'=>array(
+    'admin' => array(
+      'pattern' => '^/',
+      "anonymous" => array(),
+      'form' => array(
+        'login_path' => "/user/login",
+        'check_path' => "/admin/user/dologin",
+        "default_target_path" => "/admin/user/profile",
+        "always_use_default_target_path" => true,
+        'username_parameter' => 'login[username]',
+        'password_parameter' => 'login[password]',
+        "csrf_parameter" => "login[_token]",
+        "failure_path" => "/user/login",
+        ),
+      'logout' => array(
+        'logout_path' => "/admin/user/logout",
+        "target" => '/',
+        "invalidate_session" => true,
+        "delete_cookies" => array(
+          "mongoblog.local" => array("domain" => "mongoblog.local", "path" => "/")
+          )
+        ),
+      'users' => function(Application $app) {
+        return $app['user_manager'];
+      }
+      )
+    ),
+  'security.access_rules' => array(
+    array('^/admin', 'ROLE_USER'),
+    array('^/admin/option','ROLE_ADMIN'),
+    ),
+  'security.role_hierarchy'=> array(
+    'ROLE_ADMIN' => array('ROLE_EDITOR'),
+    "ROLE_EDITOR" => array('ROLE_WRITER'),
+    "ROLE_WRITER" => array('ROLE_USER'),
+    "ROLE_USER" => array("ROLE_SUSCRIBER"),
+    ),
+  )
+);
 # cache
-$app->register(new Silex\Provider\HttpCacheServiceProvider());
+$app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.cache_dir'=>ROOT.'/cache'));
 // Gravatar
 $app->register(new GravatarServiceProvider());
-$app['cache.path'] = ROOT . '/cache';
-$app['http_cache.cache_dir'] = $app['cache.path'];
 # CUSTOM SERVICES
-$app['root']="";
 $app['configuration_script_path'] = ROOT . '/config/configuration.php';
 $app['configuration_file'] = ROOT . "/config/configuration.yaml";
 $app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"localhost";
@@ -81,18 +137,11 @@ $app['session_manager'] = $app->share(function($app) {
   return $sessionManager;
 }
 );
-# EN : defaut session storage handler overloading 
-# FR : surcharge du session.storage.handler
-$app['session.storage.handler'] = $app->share(
-  function ($app) {
-    return $app['session_manager'];
-  }
-  );
 # user manager
 $app['user_manager'] = $app->share(
   function($app) {
     return new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'],$app);
- 
+
   }
   );
 $app['user_provider']=$app->share(
@@ -118,7 +167,7 @@ $app['spam_manager']=$app->share(
   function(Silex\Application $app){
     return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$__SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
   }
-);
+  );
 
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/
 $app['options']=$app->share( 
@@ -141,16 +190,16 @@ $app['filter.mustbeowner'] = $app->protect(
   );
 
 $app['filter.mustbeadmin']=$app->protect(
-  
+
   function(Request $request)use($app){
     if(false===$app['security']->isGranted('ROLE_ADMIN')):
       $user = $app['user_manager']->getUser();
-      $app['session']->setFlash('error','You cant access this resouce!');
-      $app['monolog']->addWarning('unauthorized access from user '.$user->username.' to '.$request->getRequestURI());
-      return $app->redirect($app['url_generator']->generate('index.index'));
+    $app['session']->setFlash('error','You cant access this resouce!');
+    $app['monolog']->addWarning('unauthorized access from user '.$user->username.' to '.$request->getRequestURI());
+    return $app->redirect($app['url_generator']->generate('index.index'));
     endif;
   }
-);
+  );
 
 $app['user_infos'] = $app->share(function(Application $app) {
   $user_infos = array();
@@ -164,74 +213,11 @@ $app['user_infos'] = $app->share(function(Application $app) {
 });
 # using symfony reverse proxy
 Request::trustProxyData();
-/** FIREWALLS
- * EN : note : all the app must be behind the firewall
- * the firewall must allow anonymous users 
- * then you need to define credentials for some parts of the app behind the firewall
- * with the security.access_rules container
- */
-$app['security.firewalls'] = $app->share(function(Application $app) {
-  return array(
-    'admin' => array(
-      'pattern' => '^/',
-      "anonymous" => array(),
-      'form' => array(
-        'login_path' => "/user/login",
-        'check_path' => "/admin/user/dologin",
-        "default_target_path" => "/admin/user/profile",
-        "always_use_default_target_path" => true,
-        'username_parameter' => 'login[username]',
-        'password_parameter' => 'login[password]',
-        "csrf_parameter" => "login[_token]",
-                      #"failure_forward" => false,
-        "failure_path" => "/user/login",
-                      #"use_forward" => true,
-        ),
-      'logout' => array(
-        'logout_path' => "/admin/user/logout",
-        "target" => '/',
-        "invalidate_session" => true,
-        "delete_cookies" => array(
-          "mongoblog.local" => array("domain" => "mongoblog.local", "path" => "/")
-          )
-        ),/** security.authentication_provider **/
-      'users' => $app->share(function(Application $app) {
-        return $app['user_manager'];
-      }),
-      ),
-    );
-}
-);
-# EN : role hierarchy
-# FR : hierarchie des roles
-$app['security.role_hierarchy'] = $app->share(function() {
-  return array(
-    'ROLE_ADMIN' => array('ROLE_EDITOR'),
-    "ROLE_EDITOR" => array('ROLE_WRITER'),
-    "ROLE_WRITER" => array('ROLE_USER'),
-    "ROLE_USER" => array("ROLE_SUSCRIBER"),
-    );
-}
-);
-/**
- * EN : define access rules
- * FR : définir les règles d'accès aux ressources
- */
-$app['security.access_rules'] = $app->share(function() {
-  return array(
-    array('^/admin', 'ROLE_USER'),
-    array('^/admin/option','ROLE_ADMIN'),
-    );
-}
-);
-/**
- * AKISMET
- */
+
+
+
 $app['silexblog.url']=function(){
   return $app['url_generator']->generate('index.index');
-};
-$app['silexblog.akismet']=function(){
-  return new Net\Mpmedia\Akismet\Akismet($app['silexblog.url'],getenv("AKISMET_APIKEY"));
 };
 /** init monolog **/
 $app->before(
