@@ -11,12 +11,23 @@ namespace App\Controller\Admin{
   use App\Model\Entity\Article;
   use App\Form\ArticleForm;
 
+  use App\Model\Manager\ArticleManager;
+
   class ArticleAdminController implements ControllerProviderInterface {
 
     /**
     * @var string
     */
     protected $form;
+
+    /**
+     * @var ArticleManager
+     */
+    protected $articleManager;
+
+    function __construct(ArticleManager $articleManager){
+      $this->articleManager = $articleManager;
+    }
 
     public function connect(Application $app) {
       // créer un nouveau controller basé sur la route par défaut
@@ -40,12 +51,12 @@ namespace App\Controller\Admin{
     * @return mixed
     */
     public function index(Application $app) {
-      $articles = $app['article_manager']->getArticles(array('created_at' => -1));
+      $articles = $this->articleManager->getArticles(array('created_at' => -1));
       return $app["twig"]->render("article/index.twig", array("articles" => $articles));
     }
 
     function getBySlug(Application $app, $slug) {
-      $article = $app['article_manager']->getBySlug($slug);
+      $article = $this->articleManager->getBySlug($slug);
       if ($article == null):
       return $app->redirect($app["url_generator"]->generate("article.index"));
       endif;
@@ -82,9 +93,9 @@ namespace App\Controller\Admin{
       $article->update_count = 0;
       $article->title=$articleDatas['title'];
       $article->content=$articleDatas['content'];
-      #$article->tags= explode(",",$articleDatas['tags']);
+      $article->metadatas = $articleDatas['metadatas'];
       $article->tags= $articleDatas['tags'];
-      $article_ = $app['article_manager']->insert($article, $user['_id']);
+      $article_ = $this->articleManager->insert($article, $user['_id']);
       $app["session"]->setFlash("success", "Article \"$article_[title]\" , $article_[_id] , saved !");
       return $app->redirect($app['url_generator']->generate("admin.article.dashboard"));
       else:
@@ -95,12 +106,12 @@ namespace App\Controller\Admin{
     }
 
     function edit(Application $app, $id) {
-      $article = $app['article_manager']->getById($id);
+      $article = $this->articleManager->getById($id);
       $form = $app['form.factory']->create(new ArticleForm());
       if("POST"===$app['request']->getMethod()):
       $form->bindRequest($app["request"]);
       if ($form->isValid()):
-      $article = $app['article_manager']->getById($id);
+      $article = $this->articleManager->getById($id);
       $datas = $form->getData();
       $articleEntity = new Article($article);
       $articleEntity->title = $datas["title"];
@@ -109,7 +120,8 @@ namespace App\Controller\Admin{
       $articleEntity->update_count++;
       $articleEntity->featured = $datas['featured'];
       $articleEntity->tags=$datas['tags'];
-      $app['article_manager']->update($id,$articleEntity);
+      $articleEntity->metadatas=$datas['metadatas'];
+      $this->articleManager->update($id,$articleEntity);
       $app["session"]->setFlash("success", "the article was updated");
       return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
       else:
@@ -122,7 +134,7 @@ namespace App\Controller\Admin{
     }
 
     function delete(Application $app, $id) {
-      $app['article_manager']->remove($id);
+      $this->articleManager->remove($id);
       $app["session"]->setFlash("success", "Article $id deleted! ");
       return $app->redirect($app["url_generator"]->generate('admin.article.dashboard'));
     }
@@ -133,7 +145,7 @@ namespace App\Controller\Admin{
       $articles_per_pages = $app['request']->get('articles_per_pages') ? (int) $app['request']->get('articles_per_pages') : 5;
       $currentUser = $app['user_manager']->getUser();
       $app['monolog']->addInfo("current user : " . json_encode($currentUser));
-      $articles = $app['article_manager']->getByUserId($currentUser['_id']);
+      $articles = $this->articleManager->getByUserId($currentUser['_id']);
       $app['monolog']->addInfo("user articles : " . json_encode($articles));
       $total_pages = ceil(count($articles) / $articles_per_pages);
       $paginated_articles = $this->paginator($articles, $current_page, $articles_per_pages);
@@ -149,7 +161,7 @@ namespace App\Controller\Admin{
 
     function getFeaturedArticles(Application $app, $ids) {
       $ids = json_decode($ids);
-      $articles = $app['article_manager']->getArticlesFromIds($ids);
+      $articles = $this->articleManager->getArticlesFromIds($ids);
       return $app['twig']->render('article/featured.twig', array('articles' => $articles));
     }
 

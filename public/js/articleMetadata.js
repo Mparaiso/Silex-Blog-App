@@ -5,7 +5,7 @@
   var i=0;
   var $metadataHolder = $('#article_metadatas');
   /** @var metadataForm String **/
-  var metadataForm = $metadataHolder.data('prototype').replace("__name__label__","");
+  var metadataForm = $metadataHolder.data('prototype').replace("__name__label__","").replace("","");
   var $addMetadataButton = $("<a>",{id:'addMetadataButton',text:'Add a new metadata',"class":'btn btn-small'});
 
   $metadataHolder.prepend('<hr>').prepend($addMetadataButton);
@@ -27,8 +27,15 @@
     jQueryObject.append();
     jQueryObject.append($('<hr>'));
   };
+  var initMetadataHolder=function($metadataHolder){
+    $metadataHolder.children("div").each(function(index,object){
+      changeMetadataFormAppearance($(object));
+    });
+    //i = ++$metadataHolder.children("div").length;
+  };
   var main=function(){
-   $addMetadataButton.on('click',addMetadata);
+    initMetadataHolder($metadataHolder);
+    $addMetadataButton.on('click',addMetadata);
  };
  main();
 });

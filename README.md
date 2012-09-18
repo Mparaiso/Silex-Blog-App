@@ -26,7 +26,8 @@
   + create , update , delete articles
   + comments
   + tags
-
+  + articles support key,value metadatas 
+  
 + Symfony modules :
 	+ security
 	+ session
@@ -35,6 +36,10 @@
 	+ config
 	+ translation
 	+ ...
+
++ antispam integration 
+  +via Akismet
+
 
 ## requires :
 

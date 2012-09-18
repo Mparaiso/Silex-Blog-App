@@ -1,4 +1,3 @@
 <?
-ini_set("xdebug.max_nesting_level", 1000);
-$app = require_once __DIR__."/../App/bootstrap.php";
+$app = require_once dirname(__DIR__)."/App/config.php";
 $app['http_cache']->run();

@@ -197,4 +197,9 @@ $app['silexblog.url']=function(){
 
 /** allowed tags for content rendering in the view **/
 $app['silexblog.config.allowedTags']='<a>,<b>,<u>,<small>,<strong>,<li>,<ol>,<ul>,<img>,<h3>,<h4>,<h5>,<h6>,<p>';
+
+// EN: Get routes.
+// FR: Obtenir les routes.
+require 'routes.php';
+
 return $app;
