@@ -12,12 +12,13 @@ tinyMCE.init({
 }
 });
 </script>
-<form  novalidate novalidation action="{{action}}" method="post" {{ form_enctype(form)}} >
+<form action="{{action}}" method="post" {{ form_enctype(form)}} >
 	{{form_errors(form)}}
   <legend>{{legend}}</legend>
   {{form_row(form.title)}}
   {{form_row(form.content)}}
   {{form_row(form.tags)}}
+  {{form_row(form.metadatas)}}
   <div>
    <label class='checkbox'>
     {{ form_errors(form.featured) }}
@@ -29,3 +30,5 @@ tinyMCE.init({
    <button class='btn'><a href="{{path('admin.article.dashboard')}}">Cancel</a></button>
    <input class="btn btn-info" type="submit" name="submit">
  </form>
+ <script type="text/javascript" src='{{path('index.index')}}js/articleMetadata.js'></script>
+

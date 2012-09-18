@@ -14,6 +14,12 @@ namespace App\Form{
 			$transformer = new TagsToArrayTransformer();
 			$builder->add("title", "text", array("required" => true, "attr" => array("class" => $this->defaultClass, "placeholder" => "The title")));
       $builder->add("content", "textarea", array("attr" => array("placeholder" => "the content", "rows" => 20, "class" => $this->defaultClass)));
+      $builder->add('metadatas','collection',array(
+        "type"=>new MetaData(),
+        'allow_add' => true,
+        'allow_delete' => true,
+        'by_reference' => false,
+      ));
       $builder->add(
         #WARNING !
         #@see http://symfony.com/doc/2.0/cookbook/form/data_transformers.html
