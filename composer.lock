@@ -1,5 +1,5 @@
 {
-    "hash": "b5ee795b3a7b964f99b0c474de1626f7",
+    "hash": "917c49f6685438f0c6ccb3b4a8ed32f1",
     "packages": [
         {
             "name": "fate/silex-extensions",
@@ -35,81 +35,6 @@
             "autoload": {
                 "psr-0": {
                     "SilexExtension": "src"
-                }
-            }
-        },
-        {
-            "name": "kriswallsmith/assetic",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "a6baab9b4c4361aca51bf90ee47c1586dff3cb0c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/kriswallsmith/assetic/zipball/a6baab9b4c4361aca51bf90ee47c1586dff3cb0c",
-                "reference": "a6baab9b4c4361aca51bf90ee47c1586dff3cb0c",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/process": "2.1.*",
-                "php": ">=5.3.1"
-            },
-            "require-dev": {
-                "twig/twig": ">=1.6.0,<2.0",
-                "leafo/lessphp": "*",
-                "leafo/scssphp": "*",
-                "ptachoire/cssembed": "*",
-                "leafo/scssphp-compass": "*"
-            },
-            "suggest": {
-                "twig/twig": "Assetic provides the integration with the Twig templating engine",
-                "leafo/lessphp": "Assetic provides the integration with the lessphp LESS compiler",
-                "leafo/scssphp": "Assetic provides the integration with the scssphp SCSS compiler",
-                "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
-                "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
-            },
-            "time": "1347622188",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Assetic": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            }
-        },
-        {
-            "name": "mjohnson/decoda",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/milesj/php-decoda",
-                "reference": "67a328eaece2ff03b642bd013689feedadeb64da"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/milesj/php-decoda/zipball/67a328eaece2ff03b642bd013689feedadeb64da",
-                "reference": "67a328eaece2ff03b642bd013689feedadeb64da",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "time": "1346478156",
-            "type": "library",
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Decoda": "decoda"
                 }
             }
         },
@@ -621,38 +546,6 @@
             "autoload": {
                 "psr-0": {
                     "Symfony\\Component\\OptionsResolver": ""
-                }
-            }
-        },
-        {
-            "name": "symfony/process",
-            "version": "2.1.x-dev",
-            "target-dir": "Symfony/Component/Process",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Process",
-                "reference": "v2.1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/symfony/Process/zipball/v2.1.1",
-                "reference": "v2.1.1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "time": "1346330945",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "source",
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Process": ""
                 }
             }
         },

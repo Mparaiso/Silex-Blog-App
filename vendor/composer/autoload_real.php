@@ -24,8 +24,6 @@ class ComposerAutoloaderInit
 
         $loader->register();
 
-        require $vendorDir . '/kriswallsmith/assetic/src/functions.php';
-
         return $loader;
     }
 }

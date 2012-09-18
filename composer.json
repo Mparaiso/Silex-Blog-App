@@ -13,9 +13,7 @@
     "symfony/monolog-bridge":"*",
     "symfony/config":"*",
     "symfony/class-loader":"*",
-    "kriswallsmith/assetic":"1.*",
     "fate/silex-extensions":"*",
-    "symfony/finder":"*",
-    "mjohnson/decoda":"*"
+    "symfony/finder":"*"
   }
 }

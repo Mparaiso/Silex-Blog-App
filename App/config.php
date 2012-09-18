@@ -9,15 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Model\Manager\SessionManager;
 
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-use App\Controller\IndexController;
-use App\Controller\ArticleController;
-use App\Controller\UserController;
-use App\Controller\CommentController;
-use App\Controller\Admin\UserAdminController;
-use App\Controller\Admin\ArticleAdminController;
-
 use Net\Mpmedia\SilexExtension\Provider\GravatarServiceProvider;
 
 # bootstrap
@@ -120,8 +111,6 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.c
 // Gravatar
 $app->register(new GravatarServiceProvider());
 # CUSTOM SERVICES
-$app['configuration_script_path'] = ROOT . '/config/configuration.php';
-$app['configuration_file'] = ROOT . "/config/configuration.yaml";
 $app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"localhost";
 $app['config.database'] = getenv("MONGODB_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
 $app['config.site_title'] = "Mongo Blog";
@@ -132,10 +121,11 @@ $app["mongo"] = $app->share(
   }
   );
 # session manager
-$app['session_manager'] = $app->share(function($app) {
-  $sessionManager = new SessionManager($app['mongo'], $app['config.database']);
-  return $sessionManager;
-}
+$app['session_manager'] = $app->share(
+  function($app) {
+    $sessionManager = new SessionManager($app['mongo'], $app['config.database']);
+    return $sessionManager;
+  }
 );
 # user manager
 $app['user_manager'] = $app->share(
@@ -161,14 +151,11 @@ $app['comment_manager'] = $app->share(
     return new \App\Model\Manager\CommentManager($app["mongo"], $app["config.database"]);
   }
   );
-
-
 $app['spam_manager']=$app->share(
   function(Silex\Application $app){
     return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$__SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
   }
-  );
-
+);
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/
 $app['options']=$app->share( 
   function(Application $app){
@@ -187,7 +174,7 @@ $app['filter.mustbeowner'] = $app->protect(
     return $app->redirect($app['url_generator']->generate('index.index'));
     endif;
   }
-  );
+);
 
 $app['filter.mustbeadmin']=$app->protect(
 
@@ -199,34 +186,15 @@ $app['filter.mustbeadmin']=$app->protect(
     return $app->redirect($app['url_generator']->generate('index.index'));
     endif;
   }
-  );
+);
 
-$app['user_infos'] = $app->share(function(Application $app) {
-  $user_infos = array();
-  if ($app['security'] != null):
-    $user_infos['token'] = $app['security']->getToken();
-  if ($user_infos['token'] !== null):
-    $user_infos['user'] = json_encode($user_infos['token']->getUser());
-  endif;
-  endif;
-  return (object) $user_infos;
-});
 # using symfony reverse proxy
 Request::trustProxyData();
-
-
 
 $app['silexblog.url']=function(){
   return $app['url_generator']->generate('index.index');
 };
-/** init monolog **/
-$app->before(
-  function(Request $request)use($app){
-    if($request->getClientIp()!="127.0.0.1"):
-      $app['monolog']->addInfo(json_encode(array("ip"=>$app['request']->getClientIp())));
-    endif;
-  }
-  );
+
 /** allowed tags for content rendering in the view **/
 $app['silexblog.config.allowedTags']='<a>,<b>,<u>,<small>,<strong>,<li>,<ol>,<ul>,<img>,<h3>,<h4>,<h5>,<h6>,<p>';
 return $app;
