@@ -1,6 +1,18 @@
 {
-    "hash": "917c49f6685438f0c6ccb3b4a8ed32f1",
+    "hash": "914ac486adca06ad37ddf41b81177a63",
     "packages": [
+        {
+            "name": "documentcloud/backbone",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/documentcloud/backbone",
+                "reference": "master"
+            },
+            "type": "library",
+            "installation-source": "source",
+            "time": "1347907619"
+        },
         {
             "name": "fate/silex-extensions",
             "version": "dev-master",
@@ -821,6 +833,18 @@
             "keywords": [
                 "templating"
             ]
+        },
+        {
+            "name": "twitter/bootstrap",
+            "version": "2.0.4",
+            "dist": {
+                "type": "zip",
+                "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
         }
     ],
     "packages-dev": null,
