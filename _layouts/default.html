@@ -1,0 +1,23 @@
+---
+title: "Silex Blog App"
+---
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-responsive.min.css">
+  <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class='navbar navbar-inverse'> 
+    <div class='navbar-inner'>
+      <div class='brand'>{{ page.title }}</div>
+    </div>
+  </div>
+
+  {{ content }}
+</body>
+</html>
