@@ -1,5 +1,0 @@
-{% extends "layout.twig" %}
-{% block content %}
-{% include 'form/article.twig' with {form: form,action: path('admin.article.edit',{id: article_id}),legend: 'Update an article.'} only %}
-<div><small>Update count : {{article.update_count|default(0)}}</small></div>
-{% endblock %}

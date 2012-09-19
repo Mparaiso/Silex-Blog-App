@@ -1,6 +1,0 @@
-# default configuration file
-site_title: Silex Blog
-site_author: M.Paraiso
-site_slogan: "A Showcase app powered by PHP,Symfony,Silex framework and MongoDB"
-homepage_article_count: 10
-homepage_featured_article_count: 3

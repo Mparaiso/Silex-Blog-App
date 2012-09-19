@@ -1,4 +1,0 @@
-{% extends "layout.twig" %}
-{% block content %}
-  {% include "form/article.twig" with {form: form, action: path("admin.article.post"), legend: 'Add an article.'} only %}
-{% endblock %}

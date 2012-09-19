@@ -1,8 +1,0 @@
-<div class="span12">
-<h2>Features</h2>
-</div>
-{% for article in articles %}
-<div class="span4">
-	{% include 'article/preview.twig' with {article: article} only %}
-</div>
-{% endfor %}

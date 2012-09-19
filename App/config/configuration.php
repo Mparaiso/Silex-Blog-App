@@ -1,1 +1,0 @@
-<?php return json_decode('{"database":{"database":"mongoblog","driver":"mongodb","password":null,"server":"localhost","user":null},"site":{"title":"Mongo Blog","homepage":{"articles":10,"featured":3},"bootstrap":null},"user":{"role":{"default":"ROLE_USER"}},"security":{"params":null}}'); ?>
