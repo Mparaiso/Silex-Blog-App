@@ -10,7 +10,7 @@
 
   $metadataHolder.prepend('<hr>').prepend($addMetadataButton);
   var addMetadata = function(event){
-    var $newMetadataForm = $(metadataForm.replace(/__name__/g,++i));
+    var $newMetadataForm = $(metadataForm.replace(/__name__/g,$metadataHolder.children('div').length));
     changeMetadataFormAppearance($newMetadataForm);
     $metadataHolder.append($newMetadataForm);
     return false;

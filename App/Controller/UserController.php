@@ -29,10 +29,10 @@ namespace App\Controller{
     function connect(Application $app) {
       $user = $app['controllers_factory'];
         #@note @silex nommer une route
-      $user->match('/login', array($this,login))->bind('user.login');
-      $user->get('/logout', array($this,logout))->bind('user.logout');
-      $user->get('/signup', array($this,signup))->bind('user.signup');
-      $user->post('/dosignup', array($this,doSignUp))->bind('user.dosignup');
+      $user->match('/login', array($this,"login"))->bind('user.login');
+      $user->get('/logout', array($this,"logout"))->bind('user.logout');
+      $user->get('/signup', array($this,"signup"))->bind('user.signup');
+      $user->post('/dosignup', array($this,"doSignUp"))->bind('user.dosignup');
       return $user;
     }
 

@@ -21,7 +21,7 @@ namespace App\Controller\Admin{
     function connect(Application $app){
       /**@var $configController ControllerCollection **/
       $optionController = $app['controllers_factory'];
-      $optionController->get('/',array($this,indexAction))->bind('admin.option.index');
+      $optionController->get('/',array($this,"indexAction"))->bind('admin.option.index');
       /** only admins can access this ressouce **/
       $optionController->before($app['filter.mustbeadmin']);
       return $optionController;

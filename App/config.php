@@ -1,5 +1,4 @@
 <?php
-#error_reporting(E_ALL);
 define('ROOT',dirname(__DIR__));
 
 $loader = require ROOT."/vendor/autoload.php";
@@ -153,7 +152,7 @@ $app['comment_manager'] = $app->share(
   );
 $app['spam_manager']=$app->share(
   function(Silex\Application $app){
-    return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$__SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
+    return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$_SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
   }
 );
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/

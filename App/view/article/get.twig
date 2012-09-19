@@ -35,6 +35,7 @@
   </div>
   <hr/>
   <a name='comments'></a>
+  {#@note @silex render a controller in twig #}
   <div>{{render(path("comment.index",{'article_id': article._id}))}}</div>
   <div>{{render(path("comment.create",{'article_id': article._id}))}}</div>
   {% endblock %}

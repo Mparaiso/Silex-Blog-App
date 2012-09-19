@@ -25,9 +25,9 @@ namespace App\Controller{
     public function connect(Application $app) {
       $comment = $app["controllers_factory"];
       //routes
-      $comment->get("/create/{article_id}", array($this,create))->bind("comment.create");
-      $comment->post("/post/{article_id}", array($this,post))->bind("comment.post");
-      $comment->match("/{article_id}", array($this,index))->bind("comment.index");
+      $comment->get("/create/{article_id}", array($this,"create"))->bind("comment.create");
+      $comment->post("/post/{article_id}", array($this,"post"))->bind("comment.post");
+      $comment->match("/{article_id}", array($this,"index"))->bind("comment.index");
       //$this->spamManager = $app['spam_manager'];
       return $comment;
     }

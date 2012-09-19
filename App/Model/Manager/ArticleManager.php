@@ -35,6 +35,7 @@ namespace App\Model\Manager{
      */
     function update($article_id,Article $article) {
       $article->updated_at = new \MongoDate();
+      $article->update_count++;
       unset($article['_id']);
       $this->_collection->update(array('_id'=>new MongoId($article_id)),$article->toArray(),array('safe' => true));
       return $article;
@@ -47,7 +48,7 @@ namespace App\Model\Manager{
 
     function getById($id) {
       $article = $this->_collection->findone(array("_id" => new \MongoId($id)));
-      return $article;
+      return new Article($article);
     }
 
     function getBySlug($slug) {

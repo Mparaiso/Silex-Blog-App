@@ -27,12 +27,12 @@ namespace App\Controller{
     public function connect(Application $app) {
       // créer un nouveau controller basé sur la route par défaut
       $articleController = $app['controllers_factory'];
-      $articleController->get('/feature', array($this,getFeaturedArticles) )->bind("article.featured");
-      $articleController->match("/", array($this,index))->bind("article.index");
-      $articleController->get("/slug/{slug}", array($this,getBySlug) )->bind("article.get");
-      $articleController->get("/tag/{tag}", array($this,getByTag) )->bind("article.getbytag")->convert( 'tag',function($tag){return urldecode($tag);} );
+      $articleController->get('/feature', array($this,"getFeaturedArticles") )->bind("article.featured");
+      $articleController->match("/", array($this,"index"))->bind("article.index");
+      $articleController->get("/slug/{slug}", array($this,"getBySlug") )->bind("article.get");
+      $articleController->get("/tag/{tag}", array($this,"getByTag") )->bind("article.getbytag")->convert( 'tag',function($tag){return urldecode($tag);} );
       //get by username
-      $articleController->match('/user/{username}',array($this,getByUsername))->bind("article.getbyusername");
+      $articleController->match('/user/{username}',array($this,"getByUsername"))->bind("article.getbyusername");
       return $articleController;
     }
 
