@@ -1,7 +1,6 @@
 cache/*
 log/*
 trash/*
-vendor/*
 TODO
 .DS_Store
 .settings
