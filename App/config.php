@@ -48,17 +48,19 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 # validation
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 # monolog
-$app->register(new Silex\Provider\MonologServiceProvider(), 
-  array(
-    'monolog.logfile' => ROOT . '/../log/development.log', 
-    'monolog.name' => 'mongoblog',
-    /*'monolog.handler'=> $app->share(
-      function(Application $app){
-        return new Monolog\Handler\MongoDBHandler($app['config.mongo'],$app['config.database'],"log");
-      }
-    ),*/
-  )
-);
+// if ($app['debug']==true):
+// $app->register(new Silex\Provider\MonologServiceProvider(), 
+//   array(
+//     'monolog.logfile' => ROOT . '/../log/development.log', 
+//     'monolog.name' => 'mongoblog',
+//     'monolog.handler'=> $app->share(
+//       function(Application $app){
+//         return new Monolog\Handler\MongoDBHandler($app['config.mongo'],$app['config.database'],"log");
+//       }
+//     ),
+//   )
+// );
+//endif;
 /** Security
  * EN : note : all the app must be behind the firewall
  * the firewall must allow anonymous users 
