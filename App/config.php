@@ -8,6 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Model\Manager\SessionManager;
 
+// validation
+use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
+use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
+
 use Net\Mpmedia\SilexExtension\Provider\GravatarServiceProvider;
 
 # bootstrap
@@ -15,7 +20,7 @@ use Net\Mpmedia\SilexExtension\Provider\GravatarServiceProvider;
 $app = new Silex\Application();
 
 #debug
-$app['debug'] = true;
+$app['debug'] = getenv("DEBUG")?getenv("DEBUG"):"false";
 
 # autoloader
 $app['autoloader'] = $app->share(function()use($loader){return $loader;});

@@ -2,7 +2,7 @@
 namespace App\Model\Form\Validation{
 
   /** 
-   * simple tests on symfony validation component
+   * simple tests on symfony validation component, to learn how the component works
    * 
    */
   class ValidationTest extends \PHPUnit_Framework_TestCase{
@@ -23,8 +23,8 @@ namespace App\Model\Form\Validation{
     function testValidate(){
       /** @var $author Author **/
       $author = new Author();
-      //$author->firstName = "Marc";
-      //$author->lastName = "Prades";
+      $author->firstName = "Marc";
+      $author->lastName = "Prades";
       /** @var $validator Symfony\Component\Validator\Validator **/
       $validator = $this->app['validator'];
       //@note @symfony FR : valider un object @see http://symfony.com/doc/current/book/validation.html
@@ -41,16 +41,23 @@ namespace App\Model\Form\Validation{
   }
 
   use Symfony\Component\Validator\Constraints as Assert;
+  use Symfony\Component\Validator\Mapping\ClassMetadata;
 
   class Author{
     /**
-     * @Assert\NotBlank()
+     * @var string
      */
     public $firstName;
 
     /**
-     * @Assert\NotBlank()
+     * @var string
      */
     public $lastName;
+
+    static public function loadValidatorMetadata(ClassMetadata $metadata){
+      $metadata->addPropertyConstraint('firstName',new Assert\NotBlank());
+      $metadata->addPropertyConstraint('lastName',new Assert\NotBlank());
+
+    }
   }
 }
