@@ -46,14 +46,15 @@ namespace App\Model\Manager{
     }
 
     function testGetByUserId() {
+      //print("\n user_id = {$this->user['_id']} \n");
       $articles = $this->articleManager->getByUserId($this->user['_id']);
       $this->assertTrue(!empty($articles));
       $this->assertTrue(count($articles)>0);
     }
 
     function testBelongsTo() {
-      print "\n article.user_id : " . $this->article['user_id'] . "\n";
-      print ' user id : ' . $this->user['_id'];
+      //print "\n article.user_id : " . $this->article['user_id'] . "\n";
+      //print ' user id : ' . $this->user['_id'];
       $assertions = $this->articleManager->belongsTo($this->article['_id'], $this->user['_id']);
       # should be true
       $this->assertTrue($assertions);
@@ -72,8 +73,8 @@ namespace App\Model\Manager{
     function tearDown() {
       $this->articleManager = new ArticleManager(new Mongo("localhost"), "test");
       $this->userManager = new UserManager(new Mongo("localhost"), "test", getApp());
-      $this->userManager->remove($this->user['_id']);
-      $this->articleManager->remove($this->article['_id']);
+      $this->userManager->remove(array("_id"=>new MongoId($this->user['_id'])));
+      $this->articleManager->remove(array("_id"=>new MongoId($this->article['_id'])));
     }
   }
 }

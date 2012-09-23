@@ -74,7 +74,7 @@ namespace App\Model\Manager{
       $userToCommit = $user->toArray();
       unset($userToCommit['_id']);
       $status = $this->_collection->insert($userToCommit, array('safe' => true));
-      return $user;
+      return new UserEntity($userToCommit);
     }
 
     function getUser() {
