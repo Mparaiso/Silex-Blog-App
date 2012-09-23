@@ -1,18 +1,27 @@
 #Silex Blog
+
 ## A blog engine powered with Silex and MongoDB in php
+Check out the silex framework , by Fabien Potencier, author of Symfony,Twig,Simso,Pimple ...
+http://silex.sensiolabs.org
+
 ### this is a Silex showcase app written with php and Silex
 
 #### WHY ? 
 + help learn silex symfony 
+  + Symfony is the #1 php MVC framework, 
+  + Silex is a framework that allow direct integration with Symfony components but with a fastest learning curve.
 + help learn MongoDB
+  + MongoDB allows easy scaling of the database.
 + create a wordpress like CMS 
+  + Most of clients are used to manage their content with a Wordpress like interface
+  + this app will try to reproduce the best features of the wordpress CMS , like easy content management , easy template management , and easy plugin extension
+
 
 #### Status : Work in progress
 
 #### Author M.PARAISO
 
 ### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
-
 
 ## features
 

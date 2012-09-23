@@ -52,11 +52,11 @@ $app->register(new Silex\Provider\MonologServiceProvider(),
   array(
     'monolog.logfile' => ROOT . '/../log/development.log', 
     'monolog.name' => 'mongoblog',
-    'monolog.handler'=> $app->share(
+    /*'monolog.handler'=> $app->share(
       function(Application $app){
-        return new Monolog\Handler\MongoDBHandler($app['mongo'],$app['config.database'],"log");
+        return new Monolog\Handler\MongoDBHandler($app['config.mongo'],$app['config.database'],"log");
       }
-    ),
+    ),*/
   )
 );
 /** Security
@@ -112,9 +112,10 @@ $app->register(new GravatarServiceProvider());
 # CUSTOM SERVICES
 $app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"localhost";
 $app['config.database'] = getenv("MONGODB_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
+$app['config.akismet_apikey']=getenv('AKISMET_APIKEY');
 $app['config.site_title'] = "Mongo Blog";
 $app['config.default_user_role'] = "ROLE_WRITER";
-$app["mongo"] = $app->share(
+$app["config.mongo"] = $app->share(
   function($app) {
     return new Mongo($app['config.server']);
   }
@@ -122,14 +123,14 @@ $app["mongo"] = $app->share(
 # session manager
 $app['session_manager'] = $app->share(
   function($app) {
-    $sessionManager = new SessionManager($app['mongo'], $app['config.database']);
+    $sessionManager = new SessionManager($app['config.mongo'], $app['config.database']);
     return $sessionManager;
   }
 );
 # user manager
 $app['user_manager'] = $app->share(
   function($app) {
-    return new \App\Model\Manager\UserManager($app['mongo'], $app['config.database'],$app);
+    return new \App\Model\Manager\UserManager($app['config.mongo'], $app['config.database'],$app);
 
   }
   );
@@ -141,24 +142,24 @@ $app['user_provider']=$app->share(
 # article manager
 $app['article_manager'] = $app->share(
   function($app) {
-    return new \App\Model\Manager\ArticleManager($app['mongo'], $app['config.database']);
+    return new \App\Model\Manager\ArticleManager($app['config.mongo'], $app['config.database']);
   }
   );
 # comment manager
 $app['comment_manager'] = $app->share(
   function(Silex\Application $app) {
-    return new \App\Model\Manager\CommentManager($app["mongo"], $app["config.database"]);
+    return new \App\Model\Manager\CommentManager($app["config.mongo"], $app["config.database"]);
   }
   );
 $app['spam_manager']=$app->share(
   function(Silex\Application $app){
-    return new \App\Model\Manager\SpamManager($app['mongo'],$app['config.database'],$_SERVER["HTTP_HOST"],getenv("AKISMET_APIKEY"));
+    return new \App\Model\Manager\SpamManager($app['config.mongo'],$app['config.database'],$_SERVER["HTTP_HOST"],$app['config.akismet_apikey']);
   }
 );
 /** @var $app['option_manager'] App\Model\Manager\OptionManager **/
 $app['options']=$app->share( 
   function(Application $app){
-    return new \App\Model\Manager\OptionManager($app['mongo'],$app['config.database']);
+    return new \App\Model\Manager\OptionManager($app['config.mongo'],$app['config.database']);
   }
   );
 # FILTERS

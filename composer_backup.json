@@ -1,0 +1,48 @@
+{
+  "name":"mparaiso/silex-blog-app",
+  "version":"0.0.1",
+  "minimum-stability": "dev" ,
+  "require":{
+    "silex/silex":"1.*",
+    "symfony/form":"*",
+    "twig/twig":"*",
+    "symfony/translation":"*",
+    "symfony/twig-bridge":"*",
+    "symfony/locale":"*",
+    "symfony/validator":"*",
+    "symfony/security":"*",
+    "monolog/monolog":"*",
+    "symfony/monolog-bridge":"*",
+    "symfony/config":"*",
+    "symfony/class-loader":"*",
+    "fate/silex-extensions":"*",
+    "symfony/finder":"*",
+    "twitter/bootstrap":"*",
+    "documentcloud/backbone":"*"
+    },
+    "repositories": [
+    {
+        "type": "package",
+        "package": {
+            "version": "2.0.4",
+            "name": "twitter/bootstrap",
+            "dist": {
+                "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
+                "type": "zip"
+            }
+        }
+    },
+    {
+        "type":"package",
+        "package":{
+            "version":"master",
+            "name":"documentcloud/backbone",
+            "source":{
+                "url":"https://github.com/documentcloud/backbone",
+                "type":"git",
+                "reference":"master"
+            }
+        }
+    }
+    ]
+}
