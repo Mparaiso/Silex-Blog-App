@@ -7,17 +7,24 @@ title: "Silex Blog App"
   <meta charset="UTF-8">
   <title>{{ page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-responsive.min.css">
-  <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{  site.base }}vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{  site.base }}vendor/bootstrap/css/bootstrap-responsive.min.css">
+  <script type="text/javascript" src="{{  site.base }}vendor/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
   <div class='navbar navbar-inverse'> 
     <div class='navbar-inner'>
-      <div class='brand'>{{ page.title }}</div>
+      <a href='{{site.url}}'>
+      <div class='brand'>
+        
+          {{ page.title }}
+        
+      </div>
+      </a>
     </div>
   </div>
-
-  {{ content }}
+  <div class='container'>
+    {{ content }}
+  </div>
 </body>
 </html>

@@ -1,2 +1,4 @@
 auto: true
 server: true
+#base: /Silex-Blog-App/
+base: /
