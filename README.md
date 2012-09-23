@@ -77,6 +77,10 @@ AKISMET_APIKEY
 + templates support
 + menu management
 
+### other kitchen sink / boilerplate projects for silex :
++ https://github.com/lyrixx/Silex-Kitchen-Edition
+
+
 ### get some help : mparaiso@online.fr
 #### please contribute , fork , refactor and make pull request ;)
 
