@@ -6,6 +6,12 @@ http://silex.sensiolabs.org
 
 ### this is a Silex showcase app written with php and Silex
 
+#### Status : Work in progress
+
+#### Author M.PARAISO , Paris, France, contact mparaiso@free.fr
+
+### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
+
 #### WHY ? 
 + help learn silex symfony 
   + Symfony is the #1 php MVC framework, 
@@ -16,12 +22,6 @@ http://silex.sensiolabs.org
   + Most of clients are used to manage their content with a Wordpress like interface
   + this app will try to reproduce the best features of the wordpress CMS , like easy content management , easy template management , and easy plugin extension
 
-
-#### Status : Work in progress
-
-#### Author M.PARAISO
-
-### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
 
 ## features
 
