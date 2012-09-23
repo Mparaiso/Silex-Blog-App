@@ -4,9 +4,8 @@
 
 #### WHY ? 
 + help learn silex symfony 
-+ help learn develop a application backed by a Schenaless Database
 + help learn MongoDB
-+ create a wordpress like CMS with a micro framework like SILEX
++ create a wordpress like CMS 
 
 #### Status : Work in progress
 
@@ -58,6 +57,10 @@ install with composer :
 + change the path of the autoloader.php in app/bootstrap.php to "../vendor/autoload.php" or wherever the vendor/autoload.php file is.
 
 + use a local MongoDB server (localhost) , the name of the database is by default mongoblog OR set the envirronment variables on your server MONGODB_SERVER and MONGODB_DATABASE ( in a .htaccess file with SetEnv for instance ).
+
++ get an askimet api key to deal with spammers
+and declare a envirronment variable called
+AKISMET_APIKEY
 
 ###TODO
 
