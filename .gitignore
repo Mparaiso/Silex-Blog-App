@@ -2,5 +2,6 @@ cache/*
 log/*
 trash/*
 TODO
+public/file.php
 .DS_Store
 .settings

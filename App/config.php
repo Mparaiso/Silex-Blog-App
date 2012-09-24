@@ -174,7 +174,7 @@ $app['filter.mustbeowner'] = $app->protect(
     $user = $app['user_manager']->getUSer();
     $resource_id = $request->get('id');
     if ($app['article_manager']->belongsTo($resource_id, $user['_id']) == false):
-      $app['session']->setFlash("error", "You cant edit this resource!");
+      $app['session']->setFlash("error", "You cant access this resource!");
     return $app->redirect($app['url_generator']->generate('index.index'));
     endif;
   }
