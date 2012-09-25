@@ -48,7 +48,7 @@ namespace App\Controller{
           /** @var $comment App\Model\Entity\Comment **/
           $comment = new \App\Model\Entity\Comment($commentDatas);
           $comment->ip  = $app['request']->getClientIp();
-          if(false===$this->spamManager->commentIsSpam($comment)){
+          if(false===$this->spamManager->ipIsSpammer($comment->ip)){
             // if comment is not a spam
             $status = $commentManager->insertComment($comment, $article_id);
             $app["session"]->setFlash("success", "new comment added");
