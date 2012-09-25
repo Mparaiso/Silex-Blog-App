@@ -6,8 +6,7 @@ namespace App\Model\Manager{
 
   interface ISpamManager{
 
-    function commentIsSPam(Comment $comment);
-    function userIsSpammer(User $user);
+    function ipIsSpammer($ip);
 
   }
 }

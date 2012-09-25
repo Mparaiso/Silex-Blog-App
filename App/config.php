@@ -1,4 +1,9 @@
 <?php
+/**
+ * Silex Blog 
+ * @author M.Paraiso
+ * @copyright 2012
+ */
 define('ROOT',dirname(__DIR__));
 
 $loader = require ROOT."/vendor/autoload.php";
@@ -31,7 +36,7 @@ $app['autoloader']->add("Net",ROOT.'/Lib');
 # twig
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
   "twig.path" => ROOT . "/App/view",
-  'twig.options' => array('cache' => ROOT.'/cache', 'strict_variables' => true)
+  'twig.options' => array('cache' => ROOT.'/cache', 'strict_variables' => false)
   )
 );
 # form

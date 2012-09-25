@@ -19,41 +19,26 @@ namespace App\Model\Manager{
       $this->akismetKey = $apikey;
     }
 
-    function createAkismet(){
+    protected function _getAkismet(){
       return new Akismet($this->akismetHost,$this->akismetKey);
     }
 
-    /**
-     * @return bool
-     */ 
-    function commentIsSpam(Comment $comment)
-    {
-      $this->akismet = $this->createAkismet();
-      $this->akismet->commentAuthor = $comment['name'];
-      $this->akismet->commentAuthorEmail=$comment['email'];
-      $this->akismet->commentAuthorURL=$comment['url'];
-      $this->akismet->commentContent = $comment['content'];
-      return $this->akismet->isSpam();
-    }
+ 
 
     /**
-     * @return bool
-     */ 
-    function userIsSpammer(User $user){
-      $this->akismet = $this->createAkismet();
-      $this->akismet->commentAuthor = $user['username'];
-      $this->akismet->commentAuthorEmail=$user['email'];
-      return $this->akismet->isSpam();
-    }
-
-    /**
-     * @var check if a given ip is registered as a spammer
+     * EN : check if a given ip is registered as a spammer
+     * FR : vérifier si un ip appartient à un spammer
+     * @var $ip string
      * @return bool
      */
     function ipIsSpammer($ip){
-      $this->akismet = $this->createAkismet();
+      $this->akismet = $this->_getAkismet();
       $this->akismet->commentUserIp = $ip;
-      return $this->akismet->isSpam();
+      $isSpam = $this->akismet->isSpam();
+      if($isSpam==true){
+        $this->getCollection()->insert(array("ip"=>$ip));
+      }
+      return $isSpam;
     }
   }
 }

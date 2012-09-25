@@ -16,6 +16,7 @@ namespace App\Model\Entity{
    protected $userNonExpired=true;
    protected $credentialsNonExpired=true;
    protected $userNonLocked=true;
+   protected $ip;
    
  }
 

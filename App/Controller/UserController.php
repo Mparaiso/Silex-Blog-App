@@ -9,6 +9,7 @@ namespace App\Controller{
   use Symfony\Component\Security\Core\User\User as  AdvancedUser;
   use App\Model\Entity\User ;
   use App\Model\Manager\ISpamManager;
+  use App\Model\Manager\IUserManager;
 
 
   /**
@@ -22,7 +23,8 @@ namespace App\Controller{
      */
     protected $spamManager;
 
-    function __construct(ISpamManager $spamManager){
+    function __construct(IUserManager $userManager,ISpamManager $spamManager){
+      $this->userManager = $userManager;
       $this->spamManager = $spamManager;
     }
 
@@ -75,7 +77,8 @@ namespace App\Controller{
           $user['email'] = $datas['email'];
           $user['roles'] = array($app['config.default_user_role']); # must be an array
           $user['password'] = self::encodePassword($user['username'],$datas['password_repeated'],$app);
-          if(false===$this->spamManager->userIsSpammer($user)){ # protect from spammers
+          $user['ip']=$app['request']->getClientIp();
+          if(false==$this->spamManager->ipIsSpammer($user['ip'])){ # protect from spammers
             $userManager->registerUser($user);
             //add flash success
             $app['session']->setFlash('success', 'Your account was successfully created, please login');
