@@ -45,5 +45,15 @@ namespace App\Model\Manager{
       $this->akismet->commentAuthorEmail=$user['email'];
       return $this->akismet->isSpam();
     }
+
+    /**
+     * @var check if a given ip is registered as a spammer
+     * @return bool
+     */
+    function ipIsSpammer($ip){
+      $this->akismet = $this->createAkismet();
+      $this->akismet->commentUserIp = $ip;
+      return $this->akismet->isSpam();
+    }
   }
 }

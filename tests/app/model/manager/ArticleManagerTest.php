@@ -28,7 +28,7 @@ namespace App\Model\Manager{
       $this->articleManager = new ArticleManager(new Mongo("localhost"), "test");
       $this->userManager = new UserManager(new Mongo("localhost"), "test", getApp());
       $this->user = new \App\Model\Entity\User(array(
-        "username" => "fake_user".rand(0,1000),
+        "username" => "fake_usr".rand(0,1000),
         "type" => 'user',
         "email"=>"fake_email".rand(0,1000),
         "roles" => array("ROLE_ADMIN"),
@@ -73,8 +73,8 @@ namespace App\Model\Manager{
     function tearDown() {
       $this->articleManager = new ArticleManager(new Mongo("localhost"), "test");
       $this->userManager = new UserManager(new Mongo("localhost"), "test", getApp());
-      $this->userManager->remove(array("_id"=>new MongoId($this->user['_id'])));
-      $this->articleManager->remove(array("_id"=>new MongoId($this->article['_id'])));
+      $this->userManager->remove(new MongoId($this->user['_id']));
+      $this->articleManager->remove(new MongoId($this->article['_id']));
     }
   }
 }

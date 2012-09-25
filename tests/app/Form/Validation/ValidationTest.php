@@ -32,7 +32,7 @@ namespace App\Model\Form\Validation{
       $this->assertTrue(count($errors)==0);
       $author->lastName="";
       $errors = $validator->validate($author);
-      print_r($errors);
+      #print_r($errors);
       $this->assertCount(1,$errors);
     }
 
