@@ -10,3 +10,15 @@ $app->mount('/user', new App\Controller\UserController($app['user_manager'],$app
 $app->mount('/admin/user', new App\Controller\Admin\UserAdminController());
 $app->mount('/admin/article',new App\Controller\Admin\ArticleAdminController($app['article_manager']));
 $app->mount('/admin/option',new App\Controller\Admin\OptionAdminController($app['options']));
+
+
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use App\Form\CaptchaType;
+use App\Form\ImageType;
+$app->match('/captcha',function(Application $app,Request $request){
+  /** @var $image Symfony\Component\Form\Form **/
+  $image = $app['form.factory']->create(new ImageType());
+  return $app['twig']->render('form/captcha.twig',array('form'=>$image->createView()));
+});
