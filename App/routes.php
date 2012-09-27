@@ -19,6 +19,6 @@ use App\Form\CaptchaType;
 use App\Form\ImageType;
 $app->match('/captcha',function(Application $app,Request $request){
   /** @var $image Symfony\Component\Form\Form **/
-  $image = $app['form.factory']->create(new ImageType());
+  $image = $app['form.factory']->create(new CaptchaType());
   return $app['twig']->render('form/captcha.twig',array('form'=>$image->createView()));
 });

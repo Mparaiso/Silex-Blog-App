@@ -2,12 +2,18 @@
 namespace App\Form{
   
   use Symfony\Component\Form\FormBuilderInterface;
+  use Symfony\Component\Form\AbstractType;
   
   class CaptchaType extends AbstractType
   {
 
     public function buildForm(FormBuilderInterface $builder,array $options){
-      $builder->add(array("image","image"));
+      /**
+       * EN : @note @silex use a custom field type
+       * FR : @note @silex utiliser un champ personalisé
+       */
+      $builder->add("image",new ImageType());
+      $builder->add("text","text");
     }
     
     function getDefaultOptions(array $options){
@@ -18,7 +24,7 @@ namespace App\Form{
       return "captcha";
     }
 
-    function getParent(array $options){
+    function getParent(){
       return "form";
     }
   }

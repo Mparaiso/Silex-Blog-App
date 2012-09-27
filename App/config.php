@@ -36,6 +36,11 @@ $app['autoloader']->add("Net",ROOT.'/Lib');
 # twig
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
   "twig.path" => ROOT . "/App/view",
+  /**
+   * EN : adding custom form templates to the template array
+   * FR : ajouter des templates personalisés au tableau de templates
+   */
+  "twig.form.templates"=>array('form_div_layout.html.twig',"form/form_div_layout.twig"),
   'twig.options' => array('cache' => ROOT.'/cache', 'strict_variables' => false)
   )
 );

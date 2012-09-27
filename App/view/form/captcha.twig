@@ -1,11 +1,5 @@
 <form action="">
   <legend>Image</legend>
-  <div>
-    {{ form_label(form)}}
-    {{ form_errors(form)}}
-    {{ form_widget(form)}}
-    {% block image_widget %}
-    {% endblock image_widget %}
-  </div>
+  {{ form_widget(form)}}
   <input type="submit" value="submit">
 </form>
