@@ -86,6 +86,9 @@ AKISMET_APIKEY
 + templates support
 + menu management
 
+### Silex based frameworks
++ https://github.com/bobdenotter/bolt
+
 ### other kitchen sink / boilerplate projects for silex :
 + https://github.com/lyrixx/Silex-Kitchen-Edition
 + https://github.com/litek/silex-skeleton
