@@ -89,6 +89,7 @@ AKISMET_APIKEY
 ### other kitchen sink / boilerplate projects for silex :
 + https://github.com/lyrixx/Silex-Kitchen-Edition
 + https://github.com/litek/silex-skeleton
++ https://github.com/vesparny/silex-simple-rest
 
 ### get some help : mparaiso@online.fr
 #### please contribute , fork , refactor and make pull request ;)

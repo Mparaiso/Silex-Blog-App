@@ -17,7 +17,7 @@ class __TwigTemplate_3e37fde203ffc1f994b8a82c683a2ccc extends Twig_Template
     {
         // line 1
         echo "<form action=\"\">
-  <legend>Image</legend>
+  <legend>Captcha Form</legend>
   ";
         // line 3
         if (isset($context["form"])) { $_form_ = $context["form"]; } else { $_form_ = null; }

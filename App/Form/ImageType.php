@@ -8,15 +8,18 @@ namespace App\Form{
 
   class ImageType extends AbstractType{
 
+    /**
+     * image source
+     */
+    protected $src="blop";
+        
+
 
    function buildForm(FormBuilderInterface $builder,array $options){
-
    }
 
    function getDefaultOptions(array $options){
-    return array(
-      "src"=>"/img/image.png",
-    );
+    return array("attr"=>array('src'=>"/img/image.png"));
    }
 
    function getName(){

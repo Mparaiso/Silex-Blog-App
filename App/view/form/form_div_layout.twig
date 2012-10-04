@@ -1,7 +1,25 @@
-{% block image_widget %}
+{# @note @silex EN : theming a custom field type #}
+{# @note @silex FR : personnaliser un type de champ #}
+{% extends "form_div_layout.html.twig" %}
+{% block image_row %}
 {% spaceless %}
-this is an image
-<!-- {{ block('widget_container_attributes')}} -->
-{{ block('field_widget')}}
+<div>
+  {% set baseurl = url('index.index')|default('/') %}
+  {% set type = type|default('image') %}
+  <input type="{{type}}"  {{ block('widget_attributes') }} 
+      {% if value is not empty %}
+        value="{{ value }}" 
+      {% endif %} 
+  src='{{baseurl}}{{attr.src}}' />
+</div>
+{% endspaceless %}
+{% endblock image_row %}
+{% block captcha_widget %}
+{% spaceless %}
+    {% if compound %}
+        {{ block('form_widget_compound') }}
+    {% else %}
+        {{ block('form_widget_simple') }}
+    {% endif %}
 {% endspaceless %}
 {% endblock %}
