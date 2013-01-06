@@ -93,6 +93,7 @@ AKISMET_APIKEY
 
 + https://github.com/lyrixx/Silex-Kitchen-Edition
 + https://github.com/litek/silex-skeleton
++ https://github.com/fabpot/Silex-Skeleton
 + https://github.com/vesparny/silex-simple-rest
 
 ### get some help : mparaiso@online.fr
