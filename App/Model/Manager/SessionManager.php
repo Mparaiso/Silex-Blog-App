@@ -38,7 +38,7 @@ class SessionManager extends BaseManager implements \SessionHandlerInterface{
     session_name(self::SESSION_NAME);
     session_cache_limiter('nocache');
 # start session
-    session_start();
+    //session_start();
   }
 
   public function open($path, $name) {

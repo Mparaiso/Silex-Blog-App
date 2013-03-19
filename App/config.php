@@ -41,7 +41,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
    * FR : ajouter des templates personalisés au tableau de templates
    */
   "twig.form.templates"=>array('form_div_layout.html.twig',"form/form_div_layout.twig"),
-  'twig.options' => array('cache' => ROOT.'/cache', 'strict_variables' => false)
+  'twig.options' => array('cache' => ROOT.'/temp/twig', 'strict_variables' => false)
   )
 );
 # form
@@ -64,7 +64,7 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 # monolog
 $app->register(new Silex\Provider\MonologServiceProvider(),array(
-    'monolog.logfile' => ROOT . '/../log/development.log', 
+    'monolog.logfile' => ROOT . '/temp/'.date("Y:m:d").'.log', 
     'monolog.name' => 'mongoblog',
     'monolog.handler'=> $app->share(
       function(Application $app){
@@ -120,7 +120,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(),array(
   )
 );
 # cache
-$app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.cache_dir'=>ROOT.'/cache'));
+$app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.cache_dir'=>ROOT.'/temp/http'));
 // Gravatar
 $app->register(new GravatarServiceProvider());
 # CUSTOM SERVICES
