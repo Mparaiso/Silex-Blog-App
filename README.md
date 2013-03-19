@@ -10,7 +10,7 @@ http://silex.sensiolabs.org
 
 #### Author M.PARAISO , Paris, France, contact mparaiso@free.fr
 
-### LIVE DEMO : http://mpmedia.alwaysdata.net/silexblog/
+### LIVE DEMO : http://silex-mongoblog.herokuapp.com/
 
 #### WHY ? 
 + help learn silex symfony 
