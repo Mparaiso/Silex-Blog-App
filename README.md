@@ -4,13 +4,22 @@
 Check out the silex framework , by Fabien Potencier, author of Symfony,Twig,Simso,Pimple ...
 http://silex.sensiolabs.org
 
+### LIVE DEMO : http://silex-mongoblog.herokuapp.com/
+
+#### ChangeLog
+
+0.0.21 : 
+
+  + server variable for database server is now SILEXPRESS_DBSERVER
+  + server variable for database name is now SILEXPRESS_DBNAME
+
 ### this is a Silex showcase app written with php and Silex
 
 #### Status : Work in progress
 
 #### Author M.PARAISO , Paris, France, contact mparaiso@free.fr
 
-### LIVE DEMO : http://silex-mongoblog.herokuapp.com/
+
 
 #### WHY ? 
 + help learn silex symfony 
@@ -65,7 +74,7 @@ install with composer :
 
 + change the path of the autoloader.php in app/bootstrap.php to "../vendor/autoload.php" or wherever the vendor/autoload.php file is.
 
-+ use a local MongoDB server (localhost) , the name of the database is by default mongoblog OR set the envirronment variables on your server MONGODB_SERVER and MONGODB_DATABASE ( in a .htaccess file with SetEnv for instance ).
++ use a local MongoDB server (localhost) , the name of the database is by default mongoblog OR set the envirronment variables on your server SILEXPRESS_DBSERVER and SILEXPRESS_DBNAME ( in a .htaccess file with SetEnv for instance ).
 
 + get an askimet api key to deal with spammers
 and declare a envirronment variable called

@@ -124,8 +124,8 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.c
 // Gravatar
 $app->register(new GravatarServiceProvider());
 # CUSTOM SERVICES
-$app['config.server'] = getenv('MONGODB_SERVER')?getenv('MONGODB_SERVER'):"localhost";
-$app['config.database'] = getenv("MONGODB_DATABASE")?getenv("MONGODB_DATABASE"):"mongoblog";
+$app['config.server'] = getenv('SILEXPRESS_DBSERVER')?getenv('SILEXPRESS_DBSERVER'):"localhost";
+$app['config.database'] = getenv("SILEXPRESS_DBNAME ")?getenv("SILEXPRESS_DBNAME "):"mongoblog";
 $app['config.akismet_apikey']=getenv('AKISMET_APIKEY');
 $app['config.site_title'] = "Mongo Blog";
 $app['config.default_user_role'] = "ROLE_WRITER";
