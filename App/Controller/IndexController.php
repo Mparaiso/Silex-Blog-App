@@ -32,7 +32,6 @@ namespace App\Controller{
             // créer un nouveau controller basé sur la route par défaut
             $index = $app['controllers_factory'];
             $index->match("/",'App\Controller\IndexController::index')->bind("index.index");
-            $index->match("/info",'App\Controller\IndexController::info');
             $index->match("/about",'App\Controller\IndexController::about')->bind("index.about");
             $index->match("/contact",'App\Controller\IndexController::contact')->bind("index.contact");
             return $index;
